@@ -10,7 +10,7 @@ extension CanariLength {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var valueEncodedWithUnit : String {
+  public var valueEncodedWithUnit : String { // §
     if self == .zero {
       return "0"
     }else if self.isAligned (CanariLength.Unit.cm.length) {
@@ -40,7 +40,7 @@ extension Scanner {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  func scanCanariLengthEncodedWithUnit () -> CanariLength? {
+  public func scanCanariLengthEncodedWithUnit () -> CanariLength? { // §
     if let v = self.scanInt () {
       if self.scanString ("mm") != nil {
         return .mm (v)
@@ -72,7 +72,7 @@ extension String {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  func decodedCanariLengthWithUnit () -> CanariLength? {
+  public func decodedCanariLengthWithUnit () -> CanariLength? { // §
     let scanner = Scanner (string: self)
     return scanner.scanCanariLengthEncodedWithUnit ()
   }
