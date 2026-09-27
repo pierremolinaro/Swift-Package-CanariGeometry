@@ -12,16 +12,8 @@ let package = Package (
   products: [
     .library (name: "CanariGeometry", targets: ["CanariGeometry"])
   ],
-//  dependencies: [
-//    .package (url: "https://github.com/dankogai/swift-int2x.git", from: "0.4.2")
-//  ],
   targets: [
-    .target (
-      name: "CanariGeometry",
-      dependencies: [
-  //      .product (name: "Int2X", package: "swift-int2x"])
-      ]
-    )
+    .target (name: "CanariGeometry")
   ],
   swiftLanguageModes: [.v6]
 )
