@@ -16,13 +16,13 @@ public struct CanariLength : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (_ inValue : Double, in inLengthUnit : CanariLength.Unit) {
+  public init (_ inValue : Double, in inLengthUnit : CanariLengthUnit) {
     self.cuValue = Int (inValue * Double (inLengthUnit.cuValue))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (_ inValue : Int, in inLengthUnit : CanariLength.Unit) {
+  public init (_ inValue : Int, in inLengthUnit : CanariLengthUnit) {
     self.cuValue = inValue * inLengthUnit.cuValue
   }
 
@@ -89,36 +89,36 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var cmValue : Double {
-    return Double (self.cuValue) / Double (Unit.cm.cuValue)
+    return Double (self.cuValue) / Double (CanariLengthUnit.cm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mmValue : Double {
-    return Double (self.cuValue) / Double (Unit.mm.cuValue)
+    return Double (self.cuValue) / Double (CanariLengthUnit.mm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var inchValue : Double {
-    return Double (self.cuValue) / Double (Unit.inch.cuValue)
+    return Double (self.cuValue) / Double (CanariLengthUnit.inch.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var ptValue : CGFloat {
-    return Double (self.cuValue) / Double (Unit.pt.cuValue)
+    return Double (self.cuValue) / Double (CanariLengthUnit.pt.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var µmValue : CGFloat {
-    return Double (self.cuValue) / Double (Unit.µm.cuValue)
+    return Double (self.cuValue) / Double (CanariLengthUnit.µm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func value (in inUnit : CanariLength.Unit) -> Double {
+  public func value (in inUnit : CanariLengthUnit) -> Double {
     return Double (self.cuValue) / Double (inUnit.cuValue)
   }
 
@@ -141,7 +141,7 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var µmAligned : CanariLength {
-    let µm = CanariLength.Unit.µm.cuValue
+    let µm = CanariLengthUnit.µm.cuValue
     if self.cuValue > 0 {
       return .cu (((self.cuValue + µm / 2) / µm) * µm)
     }else if self.cuValue < 0 {
@@ -159,7 +159,7 @@ public struct CanariLength : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func string (in inUnit : CanariLength.Unit, fractionDigits inCount : Int) -> String {
+  public func string (in inUnit : CanariLengthUnit, fractionDigits inCount : Int) -> String {
     self.value (in: inUnit).strf (inCount) + " " + inUnit.unitString
   }
 

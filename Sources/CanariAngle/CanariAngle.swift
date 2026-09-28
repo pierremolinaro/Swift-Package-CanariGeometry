@@ -12,120 +12,95 @@ public struct CanariAngle : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let radians : Double // -π ... π
+  public let radianValue : Double // -π ... π
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (fromPoint inStartPoint : CanariPoint, toPoint inTargetPoint : CanariPoint) {
     let dyMM = (inTargetPoint.y - inStartPoint.y).ptValue
     let dxMM = (inTargetPoint.x - inStartPoint.x).ptValue
-    self.radians = Darwin.atan2 (dyMM, dxMM)
+    self.radianValue = Darwin.atan2 (dyMM, dxMM)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (_ inValue : Double, in inAngleUnit : CanariAngle.Unit) {
-    self.radians = radiansNormalized (inValue * inAngleUnit.radians ())
+  public init (_ inValue : Double, in inAngleUnit : CanariAngleUnit) {
+    self.radianValue = radiansNormalized (inValue * inAngleUnit.radian ())
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (adding inFirst : CanariAngle, _ inSecond : CanariAngle) {
-    self.radians = radiansNormalized (inFirst.radians + inSecond.radians)
+    self.radianValue = radiansNormalized (inFirst.radianValue + inSecond.radianValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inAngle : CanariAngle, multiplyBy inValue : Double) {
-    self.radians = radiansNormalized (inAngle.radians * inValue)
+    self.radianValue = radiansNormalized (inAngle.radianValue * inValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public static func < (inLeft : CanariAngle, inRight : CanariAngle) -> Bool { // Comparable protocol
-    return inLeft.radians < inRight.radians
+    return inLeft.radianValue < inRight.radianValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static func degrees (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .degrees) }
-  public static func radians (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .radians) }
+  public static func degree (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .degree) }
+  public static func radian (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .radian) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var degrees : Double {
-    self.radians / CanariAngle.Unit.degrees.radians ()
+  public var degreeValue : Double {
+    self.radianValue / CanariAngleUnit.degree.radian ()
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func value (in inUnit : CanariAngle.Unit) -> Double {
-    self.radians / inUnit.radians ()
+  public func value (in inUnit : CanariAngleUnit) -> Double {
+    self.radianValue / inUnit.radian ()
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.radians == 0.0 }
+  public var isZero : Bool { return self.radianValue == 0.0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var zero : CanariAngle { return CanariAngle (0, in: .degrees) }
+  public static var zero : CanariAngle { return CanariAngle (0, in: .degree) }
 
-  public static var degrees45 : CanariAngle { return CanariAngle (45, in: .degrees) }
+  public static var degrees45 : CanariAngle { return CanariAngle (45, in: .degree) }
 
-  public static var degrees90 : CanariAngle { return CanariAngle (90, in: .degrees) }
+  public static var degrees90 : CanariAngle { return CanariAngle (90, in: .degree) }
 
-  public static var degrees135 : CanariAngle { return CanariAngle (135, in: .degrees) }
+  public static var degrees135 : CanariAngle { return CanariAngle (135, in: .degree) }
 
-  public static var degrees180 : CanariAngle { return CanariAngle (180, in: .degrees) }
+  public static var degrees180 : CanariAngle { return CanariAngle (180, in: .degree) }
 
-  public static var degrees225 : CanariAngle { return CanariAngle (225, in: .degrees) }
+  public static var degrees225 : CanariAngle { return CanariAngle (225, in: .degree) }
 
-  public static var degrees270 : CanariAngle { return CanariAngle (270, in: .degrees) }
+  public static var degrees270 : CanariAngle { return CanariAngle (270, in: .degree) }
 
-  public static var degrees315 : CanariAngle { return CanariAngle (315, in: .degrees) }
+  public static var degrees315 : CanariAngle { return CanariAngle (315, in: .degree) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func sinus () -> Double {
-    return sin (self.radians)
+    return sin (self.radianValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func cosinus () -> Double {
-    return cos (self.radians)
+    return cos (self.radianValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func string (in inUnit : CanariAngle.Unit, fractionDigits inCount : Int) -> String {
+  public func string (in inUnit : CanariAngleUnit, fractionDigits inCount : Int) -> String {
     return self.value (in: inUnit).strf (inCount) + inUnit.unitString
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public enum Unit {
-    case degrees
-    case grade
-    case radians
-
-    public func radians () -> Double {
-      switch self {
-        case .degrees : return .pi / 180
-        case .grade  : return .pi / 200.0
-        case .radians : return 1.0
-      }
-    }
-
-    public var unitString : String {
-      switch self {
-        case .degrees : return "°"
-        case .grade  : return "gr"
-        case .radians : return "rd"
-      }
-    }
-
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -136,14 +111,14 @@ public struct CanariAngle : Hashable, Comparable, Sendable {
 
 fileprivate func radiansNormalized (_ inRadians : Double) -> Double {
   let twoPi = 2.0 * .pi
-  var radians = inRadians
-  while radians <= -.pi {
-    radians += twoPi
+  var radian = inRadians
+  while radian <= -.pi {
+    radian += twoPi
   }
-  while radians > .pi {
-    radians -= twoPi
+  while radian > .pi {
+    radian -= twoPi
   }
-  return radians
+  return radian
 }
 
 //--------------------------------------------------------------------------------------------------

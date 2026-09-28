@@ -16,13 +16,13 @@ public struct CanariArea : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (_ inValue : Double, in inLengthUnit : CanariArea.Unit) {
+  public init (_ inValue : Double, in inLengthUnit : CanariAreaUnit) {
     self.cu2Value = Int (inValue * Double (inLengthUnit.cu2Value))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (_ inValue : Int, in inLengthUnit : CanariArea.Unit) {
+  public init (_ inValue : Int, in inLengthUnit : CanariAreaUnit) {
     self.cu2Value = inValue * inLengthUnit.cu2Value
   }
 
@@ -88,30 +88,30 @@ public struct CanariArea : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var cm2Value : Double {
-    return Double (self.cu2Value) / Double (Unit.cm2.cu2Value)
+    return Double (self.cu2Value) / Double (CanariAreaUnit.cm2.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mm2Value : Double {
-    return Double (self.cu2Value) / Double (Unit.mm2.cu2Value)
+    return Double (self.cu2Value) / Double (CanariAreaUnit.mm2.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var pt2Value : CGFloat {
-    return Double (self.cu2Value) / Double (Unit.pt2.cu2Value)
+    return Double (self.cu2Value) / Double (CanariAreaUnit.pt2.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func value (in inUnit : CanariArea.Unit) -> Double {
+  public func value (in inUnit : CanariAreaUnit) -> Double {
     return Double (self.cu2Value) / Double (inUnit.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func string (in inUnit : CanariArea.Unit, fractionDigits inCount : Int) -> String {
+  public func string (in inUnit : CanariAreaUnit, fractionDigits inCount : Int) -> String {
     self.value (in: inUnit).strf (inCount) + " " + inUnit.unitString
   }
 

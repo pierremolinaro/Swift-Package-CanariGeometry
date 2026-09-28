@@ -26,57 +26,49 @@ private let CANARI_UNITS_PER_PIXEL = CANARI_UNITS_PER_INCH / 72
 
 //--------------------------------------------------------------------------------------------------
 
-public extension CanariLength {
+public enum CanariLengthUnit : Sendable, Equatable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  enum Unit : Sendable {
+  case mm
+  case cm
+  case inch
+  case mil
+  case µm
+  case pt // Cocoa point, 1/72 inch
+  case cu // Canari Unit 1cu = 1/90 µm
 
-    // -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    case mm
-    case cm
-    case inch
-    case mil
-    case µm
-    case pt // Cocoa point, 1/72 inch
-    case cu // Canari Unit 1cu = 1/90 µm
-
-    // -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-
-    public var cuValue : Int {
-      switch self {
-        case .mm   : return CANARI_UNITS_PER_MM
-        case .cm   : return CANARI_UNITS_PER_CM
-        case .inch : return CANARI_UNITS_PER_INCH
-        case .mil  : return CANARI_UNITS_PER_MIL
-        case .µm   : return CANARI_UNITS_PER_µM
-        case .cu   : return 1
-        case .pt   : return CANARI_UNITS_PER_PIXEL
-      }
+  public var cuValue : Int {
+    switch self {
+      case .mm   : return CANARI_UNITS_PER_MM
+      case .cm   : return CANARI_UNITS_PER_CM
+      case .inch : return CANARI_UNITS_PER_INCH
+      case .mil  : return CANARI_UNITS_PER_MIL
+      case .µm   : return CANARI_UNITS_PER_µM
+      case .cu   : return 1
+      case .pt   : return CANARI_UNITS_PER_PIXEL
     }
-
-    // -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-
-    public var unitString : String {
-      switch self {
-        case .mm   : return "mm"
-        case .cm   : return "cm"
-        case .inch : return "inch"
-        case .mil  : return "mil"
-        case .µm   : return "µm"
-        case .cu   : return "cu"
-        case .pt   : return "pt"
-      }
-    }
-
-    // -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-
-    public var length : CanariLength { .cu (self.cuValue) }
-
-    // -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-
   }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var unitString : String {
+    switch self {
+      case .mm   : return "mm"
+      case .cm   : return "cm"
+      case .inch : return "inch"
+      case .mil  : return "mil"
+      case .µm   : return "µm"
+      case .cu   : return "cu"
+      case .pt   : return "pt"
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var length : CanariLength { .cu (self.cuValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

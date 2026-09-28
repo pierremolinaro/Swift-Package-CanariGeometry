@@ -11,7 +11,7 @@ extension CanariAngle : CustomStringConvertible {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var description : String { // CustomStringConvertible protocol
-    self.degrees.strf (3) + Unit.degrees.unitString
+    self.degreeValue.strf (3) + CanariAngleUnit.degree.unitString
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

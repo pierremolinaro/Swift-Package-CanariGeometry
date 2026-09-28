@@ -16,7 +16,7 @@ extension CanariAngle : Codable {
     let container = try inDecoder.singleValueContainer ()
     let string = try container.decode (String.self)
     if let v = Int (string) {
-      self.init (Double (v) / 1000.0, in: .degrees)
+      self.init (Double (v) / 1000.0, in: .degree)
     }else {
       throw DecodingError.dataCorruptedError (in: container, debugDescription: "Invalid angle string")
     }
@@ -26,7 +26,7 @@ extension CanariAngle : Codable {
 
   public func encode (to inEncoder : any Encoder) throws { // Encodable
     var container = inEncoder.singleValueContainer ()
-    let v = Int ((self.degrees * 1000.0).rounded ())
+    let v = Int ((self.degreeValue * 1000.0).rounded ())
     try container.encode ("\(v)")
   }
 

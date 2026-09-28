@@ -7,7 +7,7 @@ import Foundation
 //--------------------------------------------------------------------------------------------------
 
 public func sin (_ inAngle : CanariAngle) -> Double {
-  return sin (inAngle.value (in: .radians))
+  return sin (inAngle.value (in: .radian))
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ public func sin (degrees inAngle : Double) -> Double {
 //--------------------------------------------------------------------------------------------------
 
 public func cos (_ inAngle : CanariAngle) -> Double {
-  return cos (inAngle.value (in: .radians))
+  return cos (inAngle.value (in: .radian))
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -44,17 +44,7 @@ public func tan (degrees inAngle : Double) -> Double {
 
 public func atan2 (dy inDy : CanariLength, dx inDx : CanariLength) -> CanariAngle {
   let angle_rd = atan2 (inDy.mmValue, inDx.mmValue)
-  return .radians (angle_rd)
+  return .radian (angle_rd)
 }
-
-//--------------------------------------------------------------------------------------------------
-
-//public func abs (_ inAngle : CanariAngle) -> CanariAngle {
-//  if inAngle.radians < 0.0 {
-//    .radians (-inAngle.radians)
-//  }else{
-//    inAngle
-//  }
-//}
 
 //--------------------------------------------------------------------------------------------------

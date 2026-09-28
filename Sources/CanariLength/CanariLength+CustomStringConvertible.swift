@@ -11,7 +11,7 @@ extension CanariLength : CustomStringConvertible {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var description : String { // CustomStringConvertible protocol
-    self.value (in: .mm).strf (3) + " " + Unit.mm.unitString
+    self.value (in: .mm).strf (3) + " " + CanariLengthUnit.mm.unitString
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

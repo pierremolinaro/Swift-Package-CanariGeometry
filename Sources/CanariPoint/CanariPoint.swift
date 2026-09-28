@@ -144,7 +144,7 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func string (in inUnit : CanariLength.Unit, fractionDigits inCount : Int) -> String {
+  public func string (in inUnit : CanariLengthUnit, fractionDigits inCount : Int) -> String {
     "\(self.x.string (in: inUnit, fractionDigits: inCount)) x \(self.y.string (in: inUnit, fractionDigits: inCount))"
   }
 
@@ -168,7 +168,7 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   public func angle (to inPoint : CanariPoint) -> CanariAngle {
     let dy = Double (inPoint.y.cuValue - self.y.cuValue)
     let dx = Double (inPoint.x.cuValue - self.x.cuValue)
-    return .radians (Darwin.atan2 (dy, dx))
+    return .radian (Darwin.atan2 (dy, dx))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -176,7 +176,7 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   public func angle () -> CanariAngle {
     let dy = Double (self.y.cuValue)
     let dx = Double (self.x.cuValue)
-    return .radians (Darwin.atan2 (dy, dx))
+    return .radian (Darwin.atan2 (dy, dx))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
