@@ -72,7 +72,7 @@ public enum CanariLengthUnit : Sendable, Equatable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  init? (fromLength inLength : CanariLength) {
+  public init? (fromLength inLength : CanariLength) {
     switch inLength.cuValue {
     case CANARI_UNITS_PER_MM : self = .mm
     case CANARI_UNITS_PER_CM : self = .cm
