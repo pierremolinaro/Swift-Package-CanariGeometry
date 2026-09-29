@@ -72,6 +72,21 @@ public enum CanariLengthUnit : Sendable, Equatable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  init? (fromLength inLength : CanariLength) {
+    switch inLength.cuValue {
+    case CANARI_UNITS_PER_MM : self = .mm
+    case CANARI_UNITS_PER_CM : self = .cm
+    case CANARI_UNITS_PER_INCH : self = .inch
+    case CANARI_UNITS_PER_MIL : self = .mil
+    case CANARI_UNITS_PER_µM : self = .µm
+    case CANARI_UNITS_PER_POINT : self = .pt
+    case                      1 : self = .cu
+    default : return nil
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 }
 
 //--------------------------------------------------------------------------------------------------
