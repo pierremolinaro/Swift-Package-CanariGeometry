@@ -1,42 +1,38 @@
 //--------------------------------------------------------------------------------------------------
-//  Created by Pierre Molinaro on 18/09/2025.
+//  Created by Pierre Molinaro on 02/06/2026.
 //--------------------------------------------------------------------------------------------------
 
-import Foundation
+import AppKit
 
 //--------------------------------------------------------------------------------------------------
 
-extension Array where Element == CanariPoint {
+extension CanariSize {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var ptValues : [CGPoint] {
-    var result = [CGPoint] ()
-    for p in self {
-      result.append (p.ptValue)
-    }
-    return result
+  public var µmAligned : CanariSize {
+    CanariSize (width: self.width.µmAligned, height: self.height.µmAligned)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func aligning (on inUnit : CanariLength) -> [CanariPoint] {
-    var result = [CanariPoint] ()
-    for p in self {
-      result.append (p.aligning (on: inUnit))
-    }
-    return result
+  public func aligning (on inUnit : CanariLength?) -> CanariSize {
+    CanariSize (
+      width: self.width.aligning (on: inUnit),
+      height: self.height.aligning (on: inUnit)
+    )
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func areAligned (on inUnit : CanariLength) -> Bool {
-    for p in self {
-      if !p.isAligned (on: inUnit) {
-        return false
-      }
-    }
-    return true
+  public mutating func align (on inUnit : CanariLength?) {
+    self = self.aligning (on: inUnit)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func isAligned (on inUnit : CanariLength) -> Bool {
+    return self.width.isAligned (on: inUnit) && self.height.isAligned (on: inUnit)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -36,12 +36,6 @@ public struct CanariSize : Hashable, CustomStringConvertible, RawRepresentable, 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func aligning (to inUnit : CanariLength?) -> CanariSize {
-    return CanariSize (width: self.width.aligning (to: inUnit), height: self.height.aligning (to: inUnit))
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   public var ptValue : CGSize { CGSize (width: self.width.ptValue, height: self.height.ptValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -55,12 +49,6 @@ public struct CanariSize : Hashable, CustomStringConvertible, RawRepresentable, 
 
   public var description : String { // CustomStringConvertible protocol
     return "width: \(self.width), height: \(self.height)"
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func isAligned (_ inUnit : CanariLength) -> Bool {
-    return self.width.isAligned (inUnit) && self.height.isAligned (inUnit)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

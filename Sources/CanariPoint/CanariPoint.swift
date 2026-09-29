@@ -33,8 +33,8 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
 
   public init (pt inPoint : NSPoint, aligned inUnit : CanariLength? = nil) {
     if let unit = inUnit {
-      self.x = .pt (inPoint.x).aligning (to: unit)
-      self.y = .pt (inPoint.y).aligning (to: unit)
+      self.x = .pt (inPoint.x).aligning (on: unit)
+      self.y = .pt (inPoint.y).aligning (on: unit)
     }else{
       self.x = .pt (inPoint.x)
       self.y = .pt (inPoint.y)
@@ -71,24 +71,6 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
 
   public func scaled (by inScale : Double) -> CanariPoint {
     CanariPoint (x: self.x * inScale, y: self.y * inScale)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public var µmAligned : CanariPoint {
-    CanariPoint (x: self.x.µmAligned, y: self.y.µmAligned)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func aligning (to inUnit : CanariLength?) -> CanariPoint {
-    CanariPoint (x: self.x.aligning (to: inUnit), y: self.y.aligning (to: inUnit))
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func isAligned (_ inUnit : CanariLength) -> Bool {
-    self.x.isAligned (inUnit) && self.y.isAligned (inUnit)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
