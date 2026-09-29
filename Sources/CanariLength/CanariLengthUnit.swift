@@ -20,6 +20,7 @@ import AppKit
 private let CANARI_UNITS_PER_µM    = 90
 private let CANARI_UNITS_PER_MM    = CANARI_UNITS_PER_µM * 1000
 private let CANARI_UNITS_PER_CM    = CANARI_UNITS_PER_MM * 10
+private let CANARI_UNITS_PER_M     = CANARI_UNITS_PER_CM * 100
 private let CANARI_UNITS_PER_INCH  = CANARI_UNITS_PER_µM * 25_400
 private let CANARI_UNITS_PER_MIL   = CANARI_UNITS_PER_INCH / 1_000
 private let CANARI_UNITS_PER_POINT = CANARI_UNITS_PER_INCH / 72
@@ -35,6 +36,7 @@ public enum CanariLengthUnit : Sendable, Equatable {
   case inch
   case mil
   case µm
+  case m
   case pt   // Cocoa point, 1/72 inch
   case cu   // Canari Unit 1cu = 1/90 µm
 
@@ -44,6 +46,7 @@ public enum CanariLengthUnit : Sendable, Equatable {
     switch self {
       case .mm   : return CANARI_UNITS_PER_MM
       case .cm   : return CANARI_UNITS_PER_CM
+      case .m    : return CANARI_UNITS_PER_M
       case .inch : return CANARI_UNITS_PER_INCH
       case .mil  : return CANARI_UNITS_PER_MIL
       case .µm   : return CANARI_UNITS_PER_µM
@@ -58,6 +61,7 @@ public enum CanariLengthUnit : Sendable, Equatable {
     switch self {
       case .mm   : return "mm"
       case .cm   : return "cm"
+      case .m    : return "m"
       case .inch : return "inch"
       case .mil  : return "mil"
       case .µm   : return "µm"
@@ -75,6 +79,7 @@ public enum CanariLengthUnit : Sendable, Equatable {
   public init? (fromLength inLength : CanariLength) {
     switch inLength.cuValue {
     case CANARI_UNITS_PER_MM : self = .mm
+    case CANARI_UNITS_PER_M  : self = .m
     case CANARI_UNITS_PER_CM : self = .cm
     case CANARI_UNITS_PER_INCH : self = .inch
     case CANARI_UNITS_PER_MIL : self = .mil
