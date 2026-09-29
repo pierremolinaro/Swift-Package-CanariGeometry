@@ -22,7 +22,7 @@ private let CANARI_UNITS_PER_MM    = CANARI_UNITS_PER_µM * 1000
 private let CANARI_UNITS_PER_CM    = CANARI_UNITS_PER_MM * 10
 private let CANARI_UNITS_PER_INCH  = CANARI_UNITS_PER_µM * 25_400
 private let CANARI_UNITS_PER_MIL   = CANARI_UNITS_PER_INCH / 1_000
-private let CANARI_UNITS_PER_PIXEL = CANARI_UNITS_PER_INCH / 72
+private let CANARI_UNITS_PER_POINT = CANARI_UNITS_PER_INCH / 72
 
 //--------------------------------------------------------------------------------------------------
 
@@ -35,8 +35,8 @@ public enum CanariLengthUnit : Sendable, Equatable {
   case inch
   case mil
   case µm
-  case pt // Cocoa point, 1/72 inch
-  case cu // Canari Unit 1cu = 1/90 µm
+  case pt   // Cocoa point, 1/72 inch
+  case cu   // Canari Unit 1cu = 1/90 µm
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -48,7 +48,7 @@ public enum CanariLengthUnit : Sendable, Equatable {
       case .mil  : return CANARI_UNITS_PER_MIL
       case .µm   : return CANARI_UNITS_PER_µM
       case .cu   : return 1
-      case .pt   : return CANARI_UNITS_PER_PIXEL
+      case .pt   : return CANARI_UNITS_PER_POINT
     }
   }
 
