@@ -108,6 +108,12 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public func mid (with p : CanariPoint) -> CanariPoint {
+    return CanariPoint (x: (self.x + p.x) / 2, y: (self.y + p.y) / 2)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public var ptValue : CGPoint {
     return CGPoint (x: self.x.ptValue, y: self.y.ptValue)
   }
@@ -160,14 +166,6 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
     let dx = Double (self.x.cuValue)
     return .radian (Darwin.atan2 (dy, dx))
   }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  public static func distance (_ inLeft : CanariPoint, _ inRight : CanariPoint) -> CanariLength {
-//    let dx = Double ((inLeft.x - inRight.x).cuValue)
-//    let dy = Double ((inLeft.y - inRight.y).cuValue)
-//    return .cu (sqrt (dx * dx + dy * dy))
-//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

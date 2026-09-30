@@ -77,31 +77,3 @@ public func /= (_ ioLeft : inout CanariPoint, _ inRight : CGFloat) {
 }
 
 //--------------------------------------------------------------------------------------------------
-
-public extension Array where Element == CanariPoint {
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  var xMirrored : [CanariPoint] {
-    var result = [CanariPoint] ()
-    for p in self {
-      result.append (p.xMirrored)
-    }
-    return result
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  var yMirrored : [CanariPoint] {
-    var result = [CanariPoint] ()
-    for p in self {
-      result.append (p.yMirrored)
-    }
-    return result
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-}
-
-//--------------------------------------------------------------------------------------------------
