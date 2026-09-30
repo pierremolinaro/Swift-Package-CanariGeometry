@@ -16,6 +16,12 @@ public struct CanariLength : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public init (cu inValue : Int) {
+    self.cuValue = inValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public init (_ inValue : Double, in inLengthUnit : CanariLengthUnit) {
     self.cuValue = Int (inValue * Double (inLengthUnit.cuValue))
   }
@@ -51,8 +57,8 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public static var zero : CanariLength { return .cu (0) }
-  public static var max  : CanariLength { CanariLength (.max, in: .cu) }
-  public static var min  : CanariLength { CanariLength (.min, in: .cu) }
+  public static var max  : CanariLength { CanariLength (cu: .max) }
+  public static var min  : CanariLength { CanariLength (cu: .min) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -62,7 +68,7 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   public static func inch (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .inch) }
   public static func mil  (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .mil) }
   public static func pt   (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .pt) }
-  public static func cu   (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .cu) }
+  public static func cu   (_ inValue : Int) -> CanariLength { CanariLength (cu: inValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -72,7 +78,7 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   public static func inch (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .inch) }
   public static func mil  (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .mil) }
   public static func pt   (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .pt) }
-  public static func cu   (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .cu) }
+  public static func cu   (_ inValue : Double) -> CanariLength { CanariLength (cu: Int (inValue)) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
