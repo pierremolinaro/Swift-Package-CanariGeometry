@@ -10,8 +10,8 @@ extension CanariPoint {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var µmAligned : CanariPoint {
-    CanariPoint (x: self.x.µmAligned, y: self.y.µmAligned)
+  public var µmAligning : CanariPoint {
+    CanariPoint (x: self.x.µmAligning, y: self.y.µmAligning)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

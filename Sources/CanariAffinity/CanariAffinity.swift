@@ -209,7 +209,7 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
   */
 
   public mutating func rotate (_ inAngle : CanariAngle) {
-    self.mAffineTransform.rotate (byRadians: inAngle.radianValue)
+    self.mAffineTransform.rotate (byRadians: inAngle.signedRadianValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

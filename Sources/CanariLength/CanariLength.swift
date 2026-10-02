@@ -95,37 +95,37 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var cmValue : Double {
-    return Double (self.cuValue) / Double (CanariLengthUnit.cm.cuValue)
+    Double (self.cuValue) / Double (CanariLengthUnit.cm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mmValue : Double {
-    return Double (self.cuValue) / Double (CanariLengthUnit.mm.cuValue)
+    Double (self.cuValue) / Double (CanariLengthUnit.mm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var inchValue : Double {
-    return Double (self.cuValue) / Double (CanariLengthUnit.inch.cuValue)
+    Double (self.cuValue) / Double (CanariLengthUnit.inch.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var ptValue : CGFloat {
-    return Double (self.cuValue) / Double (CanariLengthUnit.pt.cuValue)
+    Double (self.cuValue) / Double (CanariLengthUnit.pt.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var µmValue : CGFloat {
-    return Double (self.cuValue) / Double (CanariLengthUnit.µm.cuValue)
+    Double (self.cuValue) / Double (CanariLengthUnit.µm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func value (in inUnit : CanariLengthUnit) -> Double {
-    return Double (self.cuValue) / Double (inUnit.cuValue)
+    Double (self.cuValue) / Double (inUnit.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

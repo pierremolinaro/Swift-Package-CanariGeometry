@@ -13,16 +13,16 @@ public enum CanariAngleUnit : Comparable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   case degree
-  case grade
+  case π
   case radian
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func radian () -> Double {
+  public var πValue : Double {
     switch self {
-      case .degree : return .pi / 180
-      case .grade  : return .pi / 200.0
-      case .radian : return 1.0
+      case .degree : return 1.0 / 180.0
+      case .π  : return 1.0
+      case .radian : return 1.0 / .pi
     }
   }
 
@@ -31,7 +31,7 @@ public enum CanariAngleUnit : Comparable {
   public var unitString : String {
     switch self {
       case .degree : return "°"
-      case .grade  : return "gr"
+      case .π  : return "* π"
       case .radian : return "rad"
     }
   }

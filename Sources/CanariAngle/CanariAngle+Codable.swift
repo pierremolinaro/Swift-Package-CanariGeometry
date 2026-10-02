@@ -26,7 +26,7 @@ extension CanariAngle : Codable {
 
   public func encode (to inEncoder : any Encoder) throws { // Encodable
     var container = inEncoder.singleValueContainer ()
-    let v = Int ((self.degreeValue * 1000.0).rounded ())
+    let v = Int ((self.unsignedDegreeValue * 1000.0).rounded ())
     try container.encode ("\(v)")
   }
 

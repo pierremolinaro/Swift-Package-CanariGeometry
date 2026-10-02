@@ -32,21 +32,14 @@ extension CanariLength {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var µmAligned : CanariLength {
-    let µm = CanariLengthUnit.µm.cuValue
-    if self.cuValue > 0 {
-      return .cu (((self.cuValue + µm / 2) / µm) * µm)
-    }else if self.cuValue < 0 {
-      return -.cu (((-self.cuValue + µm / 2) / µm) * µm)
-    }else{
-      return .zero
-    }
+  public var µmAligning : CanariLength {
+    self.aligning (on: CanariLength.µm (1))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func isAligned (on inUnit : CanariLength) -> Bool {
-    return (self.cuValue % inUnit.cuValue) == 0
+    (self.cuValue % inUnit.cuValue) == 0
   }
 
 

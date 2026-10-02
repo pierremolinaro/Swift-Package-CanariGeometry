@@ -52,13 +52,13 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var xMirrored : CanariPoint {
-    return CanariPoint (x: -self.x, y: self.y)
+    CanariPoint (x: -self.x, y: self.y)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var yMirrored : CanariPoint {
-    return CanariPoint (x: self.x, y: -self.y)
+    CanariPoint (x: self.x, y: -self.y)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -78,7 +78,7 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   public func moved (angle inAngle : CanariAngle = .zero,
                      x inDx : CanariLength = .zero,
                      y inDy : CanariLength = .zero) -> CanariPoint {
-    return CanariPoint (
+    CanariPoint (
       x: self.x * cos (inAngle) - self.y * sin (inAngle) + inDx,
       y: self.x * sin (inAngle) + self.y * cos (inAngle) + inDy
     )
@@ -87,15 +87,15 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func transformed (by inAffinity : CanariAffinity) -> CanariPoint {
-    return inAffinity.transforming (self)
+    inAffinity.transforming (self)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func distance (to inPoint : CanariPoint) -> CanariLength {
-    let dx = self.x.cuValue - inPoint.x.cuValue
-    let dy = self.y.cuValue - inPoint.y.cuValue
-    return .cu (sqrt (Double (dx * dx + dy * dy)))
+    let dx = self.x - inPoint.x
+    let dy = self.y - inPoint.y
+    return sqrt (dx * dx + dy * dy)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -109,13 +109,13 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func mid (with p : CanariPoint) -> CanariPoint {
-    return CanariPoint (x: (self.x + p.x) / 2, y: (self.y + p.y) / 2)
+    CanariPoint (x: (self.x + p.x) / 2, y: (self.y + p.y) / 2)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var ptValue : CGPoint {
-    return CGPoint (x: self.x.ptValue, y: self.y.ptValue)
+    CGPoint (x: self.x.ptValue, y: self.y.ptValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -154,17 +154,19 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func angle (to inPoint : CanariPoint) -> CanariAngle {
-    let dy = Double (inPoint.y.cuValue - self.y.cuValue)
-    let dx = Double (inPoint.x.cuValue - self.x.cuValue)
-    return .radian (Darwin.atan2 (dy, dx))
+//    let dy = Double (inPoint.y.cuValue - self.y.cuValue)
+//    let dx = Double (inPoint.x.cuValue - self.x.cuValue)
+//    return .radian (Darwin.atan2 (dy, dx))
+    return CanariAngle (from: self, to: inPoint)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func angle () -> CanariAngle {
-    let dy = Double (self.y.cuValue)
-    let dx = Double (self.x.cuValue)
-    return .radian (Darwin.atan2 (dy, dx))
+  public var angle : CanariAngle {
+    return CanariAngle (from: .zero, to: self)
+//    let dy = Double (self.y.cuValue)
+//    let dx = Double (self.x.cuValue)
+//    return .radian (Darwin.atan2 (dy, dx))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

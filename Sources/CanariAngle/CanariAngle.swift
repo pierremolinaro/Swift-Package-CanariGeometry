@@ -12,90 +12,114 @@ public struct CanariAngle : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let radianValue : Double // -π ... π
+  public let πValue : Double // -1 ... 1: -1 --> -π, +1 --> +π
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: init
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public init (from inStartPoint : CanariPoint, to inTargetPoint : CanariPoint) {
+    let dyMM = (inTargetPoint.y - inStartPoint.y).ptValue
+    let dxMM = (inTargetPoint.x - inStartPoint.x).ptValue
+    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
+  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (fromPoint inStartPoint : CanariPoint, toPoint inTargetPoint : CanariPoint) {
-    let dyMM = (inTargetPoint.y - inStartPoint.y).ptValue
-    let dxMM = (inTargetPoint.x - inStartPoint.x).ptValue
-    self.radianValue = Darwin.atan2 (dyMM, dxMM)
+  public init (from inStartPoint : NSPoint, to inTargetPoint : NSPoint) {
+    let dyMM = (inTargetPoint.y - inStartPoint.y)
+    let dxMM = (inTargetPoint.x - inStartPoint.x)
+    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Double, in inAngleUnit : CanariAngleUnit) {
-    self.radianValue = radiansNormalized (inValue * inAngleUnit.radian ())
+    self.πValue = (inValue * inAngleUnit.πValue).truncatingRemainder (dividingBy: 1.0)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (adding inFirst : CanariAngle, _ inSecond : CanariAngle) {
-    self.radianValue = radiansNormalized (inFirst.radianValue + inSecond.radianValue)
+    self.πValue = (inFirst.πValue + inSecond.πValue).truncatingRemainder (dividingBy: 1.0)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inAngle : CanariAngle, multiplyBy inValue : Double) {
-    self.radianValue = radiansNormalized (inAngle.radianValue * inValue)
+    self.πValue = (inAngle.πValue * inValue).truncatingRemainder (dividingBy: 1.0)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public init (π inValue : Double) {
+    self.πValue = inValue.truncatingRemainder (dividingBy: 1.0)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Comparable
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public static func < (inLeft : CanariAngle, inRight : CanariAngle) -> Bool { // Comparable protocol
-    return inLeft.radianValue < inRight.radianValue
+    return inLeft.πValue < inRight.πValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public static func degree (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .degree) }
+//  public static func degree (_ inValue : Int) -> CanariAngle { CanariAngle (inValue, in: .degree) }
+
   public static func radian (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .radian) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var degreeValue : Double {
-    self.radianValue / CanariAngleUnit.degree.radian ()
+  public var signedDegreeValue : Double {
+    self.πValue * 180.0
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var unsignedDegreeValue : Double {
+    var r = self.πValue * 180.0
+    if r < 0.0 {
+      r += 360.0
+    }
+    return r
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var signedRadianValue : Double {
+    self.πValue * .pi
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func value (in inUnit : CanariAngleUnit) -> Double {
-    self.radianValue / inUnit.radian ()
+    self.πValue / inUnit.πValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.radianValue == 0.0 }
+  public var isZero : Bool { return self.πValue == 0.0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var zero : CanariAngle { return CanariAngle (0, in: .degree) }
+  public static var zero : CanariAngle { return CanariAngle (π: 0.0) }
 
-  public static var degrees45 : CanariAngle { return CanariAngle (45, in: .degree) }
+  public static var degrees45 : CanariAngle { return CanariAngle (π: 45.0 / 180.0) }
 
-  public static var degrees90 : CanariAngle { return CanariAngle (90, in: .degree) }
+  public static var degrees90 : CanariAngle { return CanariAngle (π: 90.0 / 180.0) }
 
-  public static var degrees135 : CanariAngle { return CanariAngle (135, in: .degree) }
+  public static var degrees135 : CanariAngle { return CanariAngle (π: 135.0 / 180.0) }
 
-  public static var degrees180 : CanariAngle { return CanariAngle (180, in: .degree) }
+  public static var degrees180 : CanariAngle { return CanariAngle (π: 180.0 / 180.0) }
 
-  public static var degrees225 : CanariAngle { return CanariAngle (225, in: .degree) }
+  public static var degrees225 : CanariAngle { return CanariAngle (π: 225.0 / 180.0) }
 
-  public static var degrees270 : CanariAngle { return CanariAngle (270, in: .degree) }
+  public static var degrees270 : CanariAngle { return CanariAngle (π: 270.0 / 180.0) }
 
-  public static var degrees315 : CanariAngle { return CanariAngle (315, in: .degree) }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func sinus () -> Double {
-    return sin (self.radianValue)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func cosinus () -> Double {
-    return cos (self.radianValue)
-  }
+  public static var degrees315 : CanariAngle { return CanariAngle (π: 315.0 / 180.0) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

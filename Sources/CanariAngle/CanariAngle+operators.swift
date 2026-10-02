@@ -21,7 +21,7 @@ public func += (_ ioLeft : inout CanariAngle, _ inRight : CanariAngle) {
 //--------------------------------------------------------------------------------------------------
 
 public prefix func - (_ inOperand : CanariAngle) -> CanariAngle {
-  return CanariAngle.radian (-inOperand.radianValue)
+  return CanariAngle (π: -inOperand.πValue)
 }
 
 //--------------------------------------------------------------------------------------------------

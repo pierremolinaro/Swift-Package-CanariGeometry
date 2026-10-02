@@ -10,8 +10,8 @@ extension CanariSize {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var µmAligned : CanariSize {
-    CanariSize (width: self.width.µmAligned, height: self.height.µmAligned)
+  public var µmAligning : CanariSize {
+    CanariSize (width: self.width.µmAligning, height: self.height.µmAligning)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
