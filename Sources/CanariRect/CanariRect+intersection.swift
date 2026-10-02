@@ -25,6 +25,24 @@ public extension CanariRect {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //   Intersection
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func intersection (_ inOtherRect : CanariRect) -> CanariRect {
+    let result : CanariRect
+    if self.isEmpty || inOtherRect.isEmpty {
+      result = .zero // Empty Rect
+    }else{
+      let left   = max (self.left, inOtherRect.left)
+      let bottom = max (self.bottom, inOtherRect.bottom)
+      let right  = min (self.left + self.width,  inOtherRect.left + inOtherRect.width)
+      let top    = min (self.bottom + self.height, inOtherRect.bottom + inOtherRect.height)
+      result = CanariRect (left: left, bottom: bottom, width: right - left, height: top - bottom)
+    }
+    return result
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 }
 

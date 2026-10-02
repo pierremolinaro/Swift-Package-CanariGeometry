@@ -12,8 +12,8 @@ public struct CanariRect : Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let origin : CanariPoint
-  public let size : CanariSize
+  public var origin : CanariPoint
+  public var size : CanariSize
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -101,6 +101,17 @@ public struct CanariRect : Hashable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var ptValue : NSRect { NSRect (origin: self.origin.ptValue, size: self.size.ptValue) }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static var zero : CanariRect { CanariRect (origin: .zero, size: .zero) }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var left    : CanariLength { return self.origin.x }
+  public var right   : CanariLength { return self.origin.x + self.size.width }
+  public var bottom  : CanariLength { return self.origin.y }
+  public var top     : CanariLength { return self.origin.y + self.size.height }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
