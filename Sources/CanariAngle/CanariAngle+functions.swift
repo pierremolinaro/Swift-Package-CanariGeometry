@@ -7,19 +7,28 @@ import Foundation
 //--------------------------------------------------------------------------------------------------
 
 public func sin (_ inAngle : CanariAngle) -> Double {
-  return sin (inAngle.value (in: .radian))
+  return __sinpi (inAngle.πValue)
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func cos (_ inAngle : CanariAngle) -> Double {
-  return cos (inAngle.value (in: .radian))
+  return __cospi (inAngle.πValue)
+}
+
+//--------------------------------------------------------------------------------------------------
+
+public func sincos (_ inAngle : CanariAngle) -> (sin: Double, cos: Double) {
+  var sin = 0.0
+  var cos = 0.0
+  __sincospi (inAngle.πValue, &sin, &cos)
+  return (sin, cos)
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func tan (_ inAngle : CanariAngle) -> Double {
-  return sin (inAngle) / cos (inAngle)
+  return __tanpi (inAngle.πValue)
 }
 
 //--------------------------------------------------------------------------------------------------

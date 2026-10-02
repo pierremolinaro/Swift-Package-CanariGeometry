@@ -25,8 +25,9 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (length inLength : CanariLength, angle inAngle : CanariAngle) {
-    self.x = inLength * cos (inAngle)
-    self.y = inLength * sin (inAngle)
+    let (sin, cos) = sincos (inAngle)
+    self.x = inLength * cos
+    self.y = inLength * sin
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -78,9 +79,10 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
   public func moved (angle inAngle : CanariAngle = .zero,
                      x inDx : CanariLength = .zero,
                      y inDy : CanariLength = .zero) -> CanariPoint {
-    CanariPoint (
-      x: self.x * cos (inAngle) - self.y * sin (inAngle) + inDx,
-      y: self.x * sin (inAngle) + self.y * cos (inAngle) + inDy
+    let (sin, cos) = sincos (inAngle)
+    return CanariPoint (
+      x: self.x * cos - self.y * sin + inDx,
+      y: self.x * sin + self.y * cos + inDy
     )
   }
 
