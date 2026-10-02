@@ -19,25 +19,25 @@ public struct CanariAngle : Equatable, Hashable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (π inValue : Double) {
-    self.πValue = inValue.truncatingRemainder (dividingBy: 1.0)
+    self.πValue = πNormalized (inValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Double, in inAngleUnit : CanariAngleUnit) {
-    self.πValue = (inValue * inAngleUnit.πValue).truncatingRemainder (dividingBy: 1.0)
+    self.πValue = πNormalized (inValue * inAngleUnit.πValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (adding inFirst : CanariAngle, _ inSecond : CanariAngle) {
-    self.πValue = (inFirst.πValue + inSecond.πValue).truncatingRemainder (dividingBy: 1.0)
+    self.πValue = πNormalized (inFirst.πValue + inSecond.πValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inAngle : CanariAngle, multiplyBy inValue : Double) {
-    self.πValue = (inAngle.πValue * inValue).truncatingRemainder (dividingBy: 1.0)
+    self.πValue = πNormalized (inAngle.πValue * inValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -120,15 +120,20 @@ public struct CanariAngle : Equatable, Hashable, Sendable {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //MARK: Comparable
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-//  public static func < (inLeft : CanariAngle, inRight : CanariAngle) -> Bool { // Comparable protocol
-//    return inLeft.πValue < inRight.πValue
-//  }
+}
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//--------------------------------------------------------------------------------------------------
 
+fileprivate func πNormalized (_ inAngle : Double) -> Double {
+  var angle = inAngle
+  while angle < -1.0 {
+    angle += 2.0
+  }
+  while angle > 1.0 {
+    angle -= 2.0
+  }
+  return angle
 }
 
 //--------------------------------------------------------------------------------------------------
