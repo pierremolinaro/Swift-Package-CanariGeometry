@@ -13,8 +13,8 @@ public enum CanariAngleUnit : Comparable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   case degree
-  case π
   case radian
+  case π
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

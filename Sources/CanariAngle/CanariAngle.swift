@@ -8,7 +8,7 @@ import Foundation
 // struct CanariAngle
 //--------------------------------------------------------------------------------------------------
 
-public struct CanariAngle : Hashable, Comparable, Sendable {
+public struct CanariAngle : Equatable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -18,18 +18,8 @@ public struct CanariAngle : Hashable, Comparable, Sendable {
   //MARK: init
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (from inStartPoint : CanariPoint, to inTargetPoint : CanariPoint) {
-    let dyMM = (inTargetPoint.y - inStartPoint.y).ptValue
-    let dxMM = (inTargetPoint.x - inStartPoint.x).ptValue
-    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public init (from inStartPoint : NSPoint, to inTargetPoint : NSPoint) {
-    let dyMM = (inTargetPoint.y - inStartPoint.y)
-    let dxMM = (inTargetPoint.x - inStartPoint.x)
-    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
+  public init (π inValue : Double) {
+    self.πValue = inValue.truncatingRemainder (dividingBy: 1.0)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -52,16 +42,18 @@ public struct CanariAngle : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (π inValue : Double) {
-    self.πValue = inValue.truncatingRemainder (dividingBy: 1.0)
+  public init (from inStartPoint : CanariPoint, to inTargetPoint : CanariPoint) {
+    let dyMM = (inTargetPoint.y - inStartPoint.y).ptValue
+    let dxMM = (inTargetPoint.x - inStartPoint.x).ptValue
+    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //MARK: Comparable
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static func < (inLeft : CanariAngle, inRight : CanariAngle) -> Bool { // Comparable protocol
-    return inLeft.πValue < inRight.πValue
+  public init (from inStartPoint : NSPoint, to inTargetPoint : NSPoint) {
+    let dyMM = (inTargetPoint.y - inStartPoint.y)
+    let dxMM = (inTargetPoint.x - inStartPoint.x)
+    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -128,21 +120,15 @@ public struct CanariAngle : Hashable, Comparable, Sendable {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Comparable
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-}
+//  public static func < (inLeft : CanariAngle, inRight : CanariAngle) -> Bool { // Comparable protocol
+//    return inLeft.πValue < inRight.πValue
+//  }
 
-//--------------------------------------------------------------------------------------------------
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-fileprivate func radiansNormalized (_ inRadians : Double) -> Double {
-  let twoPi = 2.0 * .pi
-  var radian = inRadians
-  while radian <= -.pi {
-    radian += twoPi
-  }
-  while radian > .pi {
-    radian -= twoPi
-  }
-  return radian
 }
 
 //--------------------------------------------------------------------------------------------------
