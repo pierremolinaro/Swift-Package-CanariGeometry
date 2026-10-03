@@ -1,33 +1,23 @@
 //--------------------------------------------------------------------------------------------------
-//  Created by Pierre Molinaro on 21/09/2026.
+//  Created by Pierre Molinaro on 31/03/2026.
 //--------------------------------------------------------------------------------------------------
 
 import SwiftUI
 
 //--------------------------------------------------------------------------------------------------
 
-public extension CanariPath {
+public extension GraphicsContext {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  enum Rule {
-    case evenOddRule
-    case nonZeroRule
+  mutating func translateBy (x inX : CanariLength, y inY : CanariLength) {
+    self.translateBy (x: inX.ptValue, y: inY.ptValue)
+  }
 
-    public var uiEvenOddFill : Bool {
-      switch self {
-      case .evenOddRule : true
-      case .nonZeroRule : false
-      }
-    }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    public var cgRule : CGPathFillRule {
-      switch self {
-      case .evenOddRule : .evenOdd
-      case .nonZeroRule : .winding
-      }
-    }
-
+  mutating func translate (by inPoint : CanariPoint) {
+    self.translateBy (x: inPoint.x, y: inPoint.y)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -1,33 +1,17 @@
 //--------------------------------------------------------------------------------------------------
-//  Created by Pierre Molinaro on 21/09/2026.
+//  Created by Pierre Molinaro on 31/03/2026.
 //--------------------------------------------------------------------------------------------------
 
 import SwiftUI
 
 //--------------------------------------------------------------------------------------------------
 
-public extension CanariPath {
+public extension GraphicsContext {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  enum Rule {
-    case evenOddRule
-    case nonZeroRule
-
-    public var uiEvenOddFill : Bool {
-      switch self {
-      case .evenOddRule : true
-      case .nonZeroRule : false
-      }
-    }
-
-    public var cgRule : CGPathFillRule {
-      switch self {
-      case .evenOddRule : .evenOdd
-      case .nonZeroRule : .winding
-      }
-    }
-
+  mutating func rotate (by inAngle : CanariAngle) {
+    self.rotate (by: SwiftUI.Angle.radians (inAngle.signedRadianValue))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
