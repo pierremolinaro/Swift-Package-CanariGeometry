@@ -137,19 +137,18 @@ public struct CanariPath : Equatable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-//  public init (segment inSegment : CanariOrientedSegment) {
-//    self.init ()
-//    self.addSegment (inSegment)
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   public init (arrowFrom inStart : CanariPoint,
                to inTarget : CanariPoint,
                arrowhead inLength : CanariLength) {
     self.init ()
     self.addMove (to: inStart)
     self.addArrow (to: inTarget, arrowhead: inLength)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public mutating func withPath (_ inCallBack : (Path) -> Path) {
+    self.mPath = inCallBack (self.mPath)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
