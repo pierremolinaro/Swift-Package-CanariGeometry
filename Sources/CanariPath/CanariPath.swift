@@ -29,12 +29,6 @@ public struct CanariPath : Equatable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  internal init (cgPath inCGPath : CGPath) {
-    self.mPath = Path (inCGPath)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   internal init (swiftuiPath inPath : Path) {
     self.mPath = inPath
   }
@@ -146,10 +140,22 @@ public struct CanariPath : Equatable, Sendable {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK CGPath
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public mutating func withPath (_ inCallBack : (Path) -> Path) {
-    self.mPath = inCallBack (self.mPath)
+  public init (cgPath inCGPath : CGPath) {
+    self.mPath = Path (inCGPath)
   }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var cgPath : CGPath { self.mPath.cgPath }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+//  public mutating func withPath (_ inCallBack : (Path) -> Path) {
+//    self.mPath = inCallBack (self.mPath)
+//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
