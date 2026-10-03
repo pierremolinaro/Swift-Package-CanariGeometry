@@ -189,17 +189,17 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
        [    0       0    1 ]
    */
 
-  public static func rotating (_ inAngle : CanariAngle) -> CanariAffinity {
+  public static func rotating (by inAngle : CanariAngle) -> CanariAffinity {
     var af = CanariAffinity ()
-    af.rotate (inAngle)
+    af.rotate (by: inAngle)
     return af
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func rotating (_ inAngle : CanariAngle) -> CanariAffinity {
+  public func rotating (by inAngle : CanariAngle) -> CanariAffinity {
     var af = self
-    af.rotate (inAngle)
+    af.rotate (by: inAngle)
     return af
   }
 
@@ -208,7 +208,7 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
    Mutates an affine transformation matrix from a rotation value.
   */
 
-  public mutating func rotate (_ inAngle : CanariAngle) {
+  public mutating func rotate (by inAngle : CanariAngle) {
     self.mAffineTransform.rotate (byRadians: inAngle.signedRadianValue)
   }
 
@@ -313,6 +313,22 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
   public func transforming (_ inPoint : CanariPoint) -> CanariPoint {
     let nsPoint = self.affineTransform.transform (inPoint.ptValue)
     return CanariPoint (pt: nsPoint)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func transforming (x inX : CanariLength = .zero,
+                            y inY : CanariLength = .zero) -> CanariPoint {
+    let nsPoint = self.affineTransform.transform (NSPoint (x: inX.ptValue, y: inY.ptValue))
+    return CanariPoint (pt: nsPoint)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var angle : CanariAngle {
+    let p1 = self.transforming (CanariPoint ())
+    let p2 = self.transforming (CanariPoint (x: .pt (1)))
+    return p1.angle (to: p2)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
