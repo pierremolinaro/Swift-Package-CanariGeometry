@@ -83,7 +83,8 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
    Mutates an affine transformation matrix from x and y translation values.
   */
 
-  public mutating func translate (x inDx : CanariLength, y inDy : CanariLength) {
+  public mutating func translate (x inDx : CanariLength = .zero,
+                                  y inDy : CanariLength = .zero) {
     self.mAffineTransform.translate (x: inDx.ptValue, y: inDy.ptValue)
   }
 
