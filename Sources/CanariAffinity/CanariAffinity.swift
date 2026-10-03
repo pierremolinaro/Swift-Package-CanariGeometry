@@ -226,7 +226,7 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
    Returns the corresponding Foundation affine transformation matrix.
   */
 
-  var affineTransform : AffineTransform { self.mAffineTransform }
+  public var affineTransform : AffineTransform { self.mAffineTransform } // § --> internal
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   /**
