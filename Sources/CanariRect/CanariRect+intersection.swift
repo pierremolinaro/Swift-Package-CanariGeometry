@@ -31,7 +31,7 @@ public extension CanariRect {
   func intersection (_ inOtherRect : CanariRect) -> CanariRect {
     let result : CanariRect
     if self.isEmpty || inOtherRect.isEmpty {
-      result = .zero // Empty Rect
+      result = .empty // Empty Rect
     }else{
       let left   = max (self.left, inOtherRect.left)
       let bottom = max (self.bottom, inOtherRect.bottom)

@@ -104,10 +104,6 @@ public struct CanariRect : Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var zero : CanariRect { CanariRect (origin: .zero, size: .zero) }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   public var left    : CanariLength { return self.origin.x }
   public var right   : CanariLength { return self.origin.x + self.size.width }
   public var bottom  : CanariLength { return self.origin.y }

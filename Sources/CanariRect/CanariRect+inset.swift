@@ -16,7 +16,7 @@ public extension CanariRect {
                 dy inDy : CanariLength = .zero) -> CanariRect {
     let result : CanariRect
     if self.isEmpty {
-      result = .zero // Empty Rect
+      result = .empty // Empty Rect
     }else{
       let right = self.left + inDx
       let bottom = self.bottom + inDy
