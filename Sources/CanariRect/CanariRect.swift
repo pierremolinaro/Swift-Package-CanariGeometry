@@ -89,8 +89,8 @@ public struct CanariRect : Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var empty : CanariRect { CanariRect (origin: .zero, size: .zero) }
-  public var isEmpty : Bool { (self.size.width <= .zero) || (self.size.height <= .zero) }
+  public static var empty : CanariRect { CanariRect (origin: .zero, size: CanariSize (width: .min, height: .min)) }
+  public var isEmpty : Bool { (self.size.width < .zero) || (self.size.height < .zero) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
