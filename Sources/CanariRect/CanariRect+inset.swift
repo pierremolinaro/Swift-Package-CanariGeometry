@@ -14,17 +14,15 @@ public extension CanariRect {
 
   func insetBy (dx inDx : CanariLength = .zero,
                 dy inDy : CanariLength = .zero) -> CanariRect {
-    let result : CanariRect
     if self.isEmpty {
-      result = .empty // Empty Rect
+      return .empty
     }else{
       let right = self.left + inDx
       let bottom = self.bottom + inDy
       let left = self.left + self.width - inDx
       let top = self.bottom + self.height - inDy
-      result = CanariRect (left: right, bottom: bottom, width: left - right, height: top - bottom)
+      return CanariRect (left: right, bottom: bottom, width: left - right, height: top - bottom)
     }
-    return result
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

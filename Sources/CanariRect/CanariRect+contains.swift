@@ -13,7 +13,7 @@ public extension CanariRect {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func contains (_ inPoint : CanariPoint) -> Bool {
-    var result = inPoint.x >= self.minX
+    var result = !self.isEmpty && (inPoint.x >= self.minX)
     if result {
       result = inPoint.x <= self.maxX
     }
@@ -29,13 +29,14 @@ public extension CanariRect {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func contains (x inX : CanariLength, y inY : CanariLength) -> Bool {
-    (inX >= self.left) && (inX <= self.right) && (inY >= self.bottom) && (inY <= self.top)
+    !self.isEmpty && (inX >= self.left) && (inX <= self.right) && (inY >= self.bottom) && (inY <= self.top)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func contains (_ inRect : CanariRect) -> Bool {
-    let contains = (self.minX <= inRect.minX)
+    let contains = !self.isEmpty
+      && (self.minX <= inRect.minX)
       && (self.maxX >= inRect.maxX)
       && (self.minY <= inRect.minY)
       && (self.maxY >= inRect.maxY)
