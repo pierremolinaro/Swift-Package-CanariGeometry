@@ -19,9 +19,9 @@ public extension CanariRect {
     }else{
       let right = self.left + inDx
       let bottom = self.bottom + inDy
-      let left = self.left + self.width - inDx
-      let top = self.bottom + self.height - inDy
-      return CanariRect (left: right, bottom: bottom, width: left - right, height: top - bottom)
+      let width = self.width - 2.0 * inDx
+      let height = self.height - 2.0 * inDy
+      return CanariRect (left: right, bottom: bottom, width: width, height: height)
     }
   }
 

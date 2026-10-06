@@ -69,6 +69,16 @@ public struct CanariRect : Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public init (p1 inP1 : CanariPoint, p2 inP2 : CanariPoint) {
+    let minX = min (inP1.x, inP2.x)
+    let maxX = max (inP1.x, inP2.x)
+    let minY = min (inP1.y, inP2.y)
+    let maxY = max (inP1.y, inP2.y)
+    self.init (left: minX, bottom: minY, width: maxX - minX, height: maxY - minY)
+  }
+
+ // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public init (_ inPoints : [CanariPoint]) {
     if inPoints.isEmpty {
       self = Self.empty
@@ -89,7 +99,7 @@ public struct CanariRect : Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var empty : CanariRect { CanariRect (origin: .zero, size: CanariSize (width: .min, height: .min)) }
+  public static var empty : CanariRect { CanariRect (origin: .zero, size: CanariSize (width: -.m (1), height: -.m (1))) }
   public var isEmpty : Bool { (self.size.width < .zero) || (self.size.height < .zero) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
