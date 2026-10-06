@@ -12,10 +12,12 @@ extension CanariLength {
 
   public func aligning (on inUnit : CanariLength?) -> CanariLength {
     if let unit = inUnit, !unit.isZero {
-      if self.cuValue > 0 {
-        return .cu (((self.cuValue + unit.cuValue / 2) / unit.cuValue) * unit.cuValue)
-      }else if self.cuValue < 0 {
-        return -.cu (((-self.cuValue + unit.cuValue / 2) / unit.cuValue) * unit.cuValue)
+      let cu = self.cuValue
+      let unitCu = unit.cuValue
+      if cu > 0 {
+        return .cu (((cu + unitCu / 2) / unitCu) * unitCu)
+      }else if cu < 0 {
+        return -.cu (((-cu + unitCu / 2) / unitCu) * unitCu)
       }else{
         return .zero
       }
@@ -39,7 +41,7 @@ extension CanariLength {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func isAligned (on inUnit : CanariLength) -> Bool {
-    (self.cuValue % inUnit.cuValue) == 0
+    self.ptValue.remainder (dividingBy: inUnit.ptValue) == 0.0
   }
 
 

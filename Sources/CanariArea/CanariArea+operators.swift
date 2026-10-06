@@ -63,13 +63,13 @@ public func * (_ inLeft : CanariArea, _ inRight : Double) -> CanariArea {
 //--------------------------------------------------------------------------------------------------
 
 //public func * (_ inLeft : CanariArea, _ inRight : CanariLength) -> CanariVolume {
-//  return .cu3 (int: Int128 (inLeft.cu2Value) * Int128 (inRight.cuValue))
+//  return .cu3 (int: Int128 (inLeft.pt2Value) * Int128 (inRight.mmValue))
 //}
 
 //--------------------------------------------------------------------------------------------------
 
 //public func * (_ inLeft : CanariLength, _ inRight : CanariArea) -> CanariVolume {
-//  return .cu3 (int: Int128 (inLeft.cuValue) * Int128 (inRight.cu2Value))
+//  return .cu3 (int: Int128 (inLeft.mmValue) * Int128 (inRight.pt2Value))
 //}
 
 //--------------------------------------------------------------------------------------------------
@@ -87,19 +87,19 @@ public func / (_ inLeft : CanariArea, _ inRight : CanariArea) -> Double {
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariArea, _ inRight : Double) -> CanariArea {
-  return .cu2 (Int (Double (inLeft.cu2Value) / inRight))
+  return .pt2 (Int (Double (inLeft.pt2Value) / inRight))
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariArea, _ inRight : Int) -> CanariArea {
-  return .cu2 (inLeft.cu2Value / inRight)
+  return .pt2 (inLeft.pt2Value / Double (inRight))
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariArea, _ inRight : CanariLength) -> CanariLength {
-  return .cu (inLeft.cu2Value / inRight.cuValue)
+  return .pt (inLeft.pt2Value / inRight.mmValue)
 }
 
 //--------------------------------------------------------------------------------------------------

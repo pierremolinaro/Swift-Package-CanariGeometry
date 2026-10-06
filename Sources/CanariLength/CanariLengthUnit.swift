@@ -38,7 +38,7 @@ public enum CanariLengthUnit : Sendable, Equatable, CaseIterable {
   case µm
   case m
   case pt   // Cocoa point, 1/72 inch
-//  case cu   // Canari Unit 1cu = 1/90 µm
+  case cu
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -50,8 +50,23 @@ public enum CanariLengthUnit : Sendable, Equatable, CaseIterable {
       case .inch : return CANARI_UNITS_PER_INCH
       case .mil  : return CANARI_UNITS_PER_MIL
       case .µm   : return CANARI_UNITS_PER_µM
-//      case .cu   : return 1
+      case .cu   : return 1
       case .pt   : return CANARI_UNITS_PER_POINT
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var ptValue : Double {
+    switch self {
+      case .mm   : return Double (CANARI_UNITS_PER_MM) / Double (CANARI_UNITS_PER_POINT)
+      case .cm   : return Double (CANARI_UNITS_PER_CM) / Double (CANARI_UNITS_PER_POINT)
+      case .m    : return Double (CANARI_UNITS_PER_M) / Double (CANARI_UNITS_PER_POINT)
+      case .inch : return Double (CANARI_UNITS_PER_INCH) / Double (CANARI_UNITS_PER_POINT)
+      case .mil  : return Double (CANARI_UNITS_PER_MIL) / Double (CANARI_UNITS_PER_POINT)
+      case .µm   : return Double (CANARI_UNITS_PER_µM) / Double (CANARI_UNITS_PER_POINT)
+      case .pt   : return 1.0 // Double (CANARI_UNITS_PER_POINT) / Double (CANARI_UNITS_PER_POINT)
+      case .cu   : return 1.0 / Double (CANARI_UNITS_PER_POINT)
     }
   }
 
@@ -65,33 +80,31 @@ public enum CanariLengthUnit : Sendable, Equatable, CaseIterable {
       case .inch : return "inch"
       case .mil  : return "mil"
       case .µm   : return "µm"
-//      case .cu   : return "cu"
       case .pt   : return "pt"
+      case .cu   : return "cu"
     }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var length : CanariLength { .cu (self.cuValue) }
+  public var length : CanariLength { .pt (self.ptValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (fromNearestLength inCanariUnitLength : Int) {
-    var result = Self.mm
+    var r = Self.mm
     var nearestUnit = Int.max
     for unit in Self.allCases {
-//      if unit != .cu {
       let d = abs (unit.cuValue - inCanariUnitLength)
       if d == 0 {
         self = unit
         return
       }else if d < nearestUnit {
         nearestUnit = d
-        result = unit
+        r = unit
       }
-//      }
     }
-    self = result
+    self = r
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

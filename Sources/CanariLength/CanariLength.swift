@@ -12,53 +12,59 @@ public struct CanariLength : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let cuValue : Int // Temporaire, ---> internal
+  public let ptValue : Double
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (cu inValue : Int) {
-    self.cuValue = inValue
+    self.ptValue = Double (inValue) * CanariLengthUnit.cu.ptValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public init (cu inValue : Double) {
+    self.ptValue = inValue * CanariLengthUnit.cu.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Double, in inLengthUnit : CanariLengthUnit) {
-    self.cuValue = Int (inValue * Double (inLengthUnit.cuValue))
+    self.ptValue = inValue * inLengthUnit.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Int, in inLengthUnit : CanariLengthUnit) {
-    self.cuValue = inValue * inLengthUnit.cuValue
+    self.ptValue = Double (inValue) * inLengthUnit.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   internal init (adding inA : CanariLength, _ inB : CanariLength) {
-    self.cuValue = inA.cuValue + inB.cuValue
+    self.ptValue = inA.ptValue + inB.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariLength, multipliedByDouble inOperand : Double) {
-    self.cuValue = Int (Double (inFactor.cuValue) * inOperand)
+    self.ptValue = inFactor.ptValue * inOperand
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariLength, multipliedByInt inOperand : Int) {
-    self.cuValue = inFactor.cuValue * inOperand
+    self.ptValue = inFactor.ptValue * Double (inOperand)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.cuValue == 0 }
+  public var isZero : Bool { return self.ptValue == 0.0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var zero : CanariLength { return .cu (0) }
-  public static var max  : CanariLength { CanariLength (cu: .max) }
-  public static var min  : CanariLength { CanariLength (cu: .min) }
+  public static var zero : CanariLength { return .pt (0.0) }
+  public static var max  : CanariLength { CanariLength (cu: .max / 2) }
+  public static var min  : CanariLength { CanariLength (cu: .min / 2) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -69,7 +75,7 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   public static func inch (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .inch) }
   public static func mil  (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .mil) }
   public static func pt   (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .pt) }
-  public static func cu   (_ inValue : Int) -> CanariLength { CanariLength (cu: inValue) }
+  public static func cu   (_ inValue : Int) -> CanariLength { CanariLength (cu: Double (inValue)) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -80,7 +86,7 @@ public struct CanariLength : Hashable, Comparable, Sendable {
   public static func inch (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .inch) }
   public static func mil  (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .mil) }
   public static func pt   (_ inValue : Double) -> CanariLength { CanariLength (inValue, in: .pt) }
-  public static func cu   (_ inValue : Double) -> CanariLength { CanariLength (cu: Int (inValue)) }
+  public static func cu   (_ inValue : Double) -> CanariLength { CanariLength (cu: inValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -96,44 +102,44 @@ public struct CanariLength : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public var cuValue : Int {
+    Int (self.ptValue / CanariLengthUnit.cu.ptValue)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public var cmValue : Double {
-    Double (self.cuValue) / Double (CanariLengthUnit.cm.cuValue)
+    self.ptValue / CanariLengthUnit.cm.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mmValue : Double {
-    Double (self.cuValue) / Double (CanariLengthUnit.mm.cuValue)
+    self.ptValue / CanariLengthUnit.mm.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var inchValue : Double {
-    Double (self.cuValue) / Double (CanariLengthUnit.inch.cuValue)
+    self.ptValue / CanariLengthUnit.inch.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var milValue : Double {
-    Double (self.cuValue) / Double (CanariLengthUnit.mil.cuValue)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public var ptValue : CGFloat {
-    Double (self.cuValue) / Double (CanariLengthUnit.pt.cuValue)
+    self.ptValue / CanariLengthUnit.mil.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var µmValue : CGFloat {
-    Double (self.cuValue) / Double (CanariLengthUnit.µm.cuValue)
+    self.ptValue / CanariLengthUnit.µm.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func value (in inUnit : CanariLengthUnit) -> Double {
-    Double (self.cuValue) / Double (inUnit.cuValue)
+    self.ptValue / inUnit.ptValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

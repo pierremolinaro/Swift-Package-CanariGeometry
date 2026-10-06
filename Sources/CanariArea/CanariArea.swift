@@ -12,41 +12,41 @@ public struct CanariArea : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let cu2Value : Int // §
+  public let pt2Value : Double
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Double, in inLengthUnit : CanariAreaUnit) {
-    self.cu2Value = Int (inValue * Double (inLengthUnit.cu2Value))
+    self.pt2Value = inValue * inLengthUnit.pt2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Int, in inLengthUnit : CanariAreaUnit) {
-    self.cu2Value = inValue * inLengthUnit.cu2Value
+    self.pt2Value = Double (inValue) * inLengthUnit.pt2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   internal init (adding inA : CanariArea, _ inB : CanariArea) {
-    self.cu2Value = inA.cu2Value + inB.cu2Value
+    self.pt2Value = inA.pt2Value + inB.pt2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariArea, multipliedByDouble inOperand : Double) {
-    self.cu2Value = Int (Double (inFactor.cu2Value) * inOperand)
+    self.pt2Value = inFactor.pt2Value * inOperand
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariArea, multipliedByInt inOperand : Int) {
-    self.cu2Value = inFactor.cu2Value * inOperand
+    self.pt2Value = inFactor.pt2Value * Double (inOperand)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.cu2Value == 0 }
+  public var isZero : Bool { return self.pt2Value == 0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -88,25 +88,25 @@ public struct CanariArea : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var cm2Value : Double {
-    return Double (self.cu2Value) / Double (CanariAreaUnit.cm2.cu2Value)
+    self.pt2Value / CanariAreaUnit.cm2.pt2Value
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var cu2Value : Double {
+    self.pt2Value / CanariAreaUnit.cu2.pt2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mm2Value : Double {
-    return Double (self.cu2Value) / Double (CanariAreaUnit.mm2.cu2Value)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public var pt2Value : CGFloat {
-    return Double (self.cu2Value) / Double (CanariAreaUnit.pt2.cu2Value)
+    self.pt2Value / CanariAreaUnit.mm2.pt2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func value (in inUnit : CanariAreaUnit) -> Double {
-    return Double (self.cu2Value) / Double (inUnit.cu2Value)
+    self.pt2Value / inUnit.pt2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
