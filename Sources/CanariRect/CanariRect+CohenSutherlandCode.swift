@@ -78,6 +78,62 @@ public extension CanariRect {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Relative location of a point from rectangle center
+  //
+  //    *---------------*
+  //    |\             /|
+  //    | \   above   / |
+  //    |  \         /  |
+  //    |   \       /   |
+  //    |    \     /    |
+  //    |     \   /     |
+  //    |      \ /      |
+  //    | left  * right |
+  //    |      / \      |
+  //    |     /   \     |
+  //    |    /     \    |
+  //    |   /       \   |
+  //    |  /         \  |
+  //    | /   below   \ |
+  //    |/             \|
+  //    *---------------*
+  //
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  enum RelativeLocation { case right ; case above ; case left ; case below}
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func relativeLocation (of inPoint : CanariPoint) -> RelativeLocation {
+    if self.isEmpty {
+      return .left
+    }else{
+      let dx = inPoint.x - self.origin.x
+      let dy = inPoint.y - self.origin.y
+      if dx == .zero, dy == .zero {
+        return .left
+      }else{
+         let underAscendingDiagonal  = (self.size.width * dy) < (self.size.height * dx)
+         let descendingDiagonalX = self.size.width
+         let descendingDiagonalY = -self.size.height
+         let dxFromTopLeft = dx
+         let dyFromTopLeft = inPoint.y - self.origin.y - self.size.height
+         let underDescendingDiagonal = (descendingDiagonalX * dyFromTopLeft) < (descendingDiagonalY * dxFromTopLeft)
+         switch (underAscendingDiagonal, underDescendingDiagonal) {
+         case (false, false) :
+           return .above
+         case (false, true) :
+           return .left
+         case (true, false) :
+           return .right
+         case (true, true) :
+           return .below
+         }
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 }
 
