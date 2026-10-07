@@ -24,7 +24,8 @@ extension CanariLength : Codable {
 
   public func encode (to inEncoder : any Encoder) throws { // Encodable
     var container = inEncoder.singleValueContainer ()
-    try container.encode (self.valueEncodedWithUnit)
+    try container.encode (self.cuValue)
+//    try container.encode (self.valueEncodedWithUnit)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
