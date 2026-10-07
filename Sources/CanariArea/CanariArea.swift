@@ -22,6 +22,18 @@ public struct CanariArea : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  @inlinable public init (pt2 inValue : Double) {
+    self.pt2Value = inValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public init (pt2 inValue : Int) {
+    self.pt2Value = Double (inValue)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public init (_ inValue : Int, in inLengthUnit : CanariAreaUnit) {
     self.pt2Value = Double (inValue) * inLengthUnit.pt2Value
   }
@@ -50,7 +62,7 @@ public struct CanariArea : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public static var zero : CanariArea { return .cu2 (0) }
+  public static var zero : CanariArea { return .pt2 (0) }
   public static var max  : CanariArea { CanariArea (.max, in: .cu2) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -60,7 +72,7 @@ public struct CanariArea : Hashable, Comparable, Sendable {
   public static func µm2   (_ inValue : Int) -> CanariArea { CanariArea (inValue, in: .µm2) }
   public static func inch2 (_ inValue : Int) -> CanariArea { CanariArea (inValue, in: .inch2) }
   public static func mil2  (_ inValue : Int) -> CanariArea { CanariArea (inValue, in: .mil2) }
-  public static func pt2   (_ inValue : Int) -> CanariArea { CanariArea (inValue, in: .pt2) }
+  @inlinable public static func pt2   (_ inValue : Int) -> CanariArea { CanariArea (pt2: inValue) }
   public static func cu2   (_ inValue : Int) -> CanariArea { CanariArea (inValue, in: .cu2) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -70,7 +82,7 @@ public struct CanariArea : Hashable, Comparable, Sendable {
   public static func µm2   (_ inValue : Double) -> CanariArea { CanariArea (inValue, in: .µm2) }
   public static func inch2 (_ inValue : Double) -> CanariArea { CanariArea (inValue, in: .inch2) }
   public static func mil2  (_ inValue : Double) -> CanariArea { CanariArea (inValue, in: .mil2) }
-  public static func pt2   (_ inValue : Double) -> CanariArea { CanariArea (inValue, in: .pt2) }
+  @inlinable public static func pt2   (_ inValue : Double) -> CanariArea { CanariArea (pt2: inValue) }
   public static func cu2   (_ inValue : Double) -> CanariArea { CanariArea (inValue, in: .cu2) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -81,7 +81,7 @@ public func * (_ inLeft : CanariLength, _ inRight : Int) -> CanariLength {
 //--------------------------------------------------------------------------------------------------
 
 public func * (_ inLeft : CanariLength, _ inRight : CanariLength) -> CanariArea {
-  return CanariArea.cu2 (inRight.ptValue * inLeft.ptValue)
+  return CanariArea.pt2 (inRight.ptValue * inLeft.ptValue)
 }
 
 //--------------------------------------------------------------------------------------------------
