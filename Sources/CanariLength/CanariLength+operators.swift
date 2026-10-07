@@ -103,39 +103,3 @@ public func / (_ inLeft : CanariLength, _ inRight : Int) -> CanariLength {
 }
 
 //--------------------------------------------------------------------------------------------------
-
-public func == (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
-  return inLeft.cuValue == inRight.cuValue
-}
-
-//--------------------------------------------------------------------------------------------------
-
-public func != (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
-  return inLeft.cuValue != inRight.cuValue
-}
-
-//--------------------------------------------------------------------------------------------------
-
-public func <= (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
-  return inLeft.cuValue <= inRight.cuValue
-}
-
-//--------------------------------------------------------------------------------------------------
-
-public func >= (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
-  return inLeft.cuValue >= inRight.cuValue
-}
-
-//--------------------------------------------------------------------------------------------------
-
-public func < (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
-  return inLeft.cuValue < inRight.cuValue
-}
-
-//--------------------------------------------------------------------------------------------------
-
-public func > (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
-  return inLeft.cuValue > inRight.cuValue
-}
-
-//--------------------------------------------------------------------------------------------------

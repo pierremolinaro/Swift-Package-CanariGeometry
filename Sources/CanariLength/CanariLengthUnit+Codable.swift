@@ -12,12 +12,8 @@ extension CanariLengthUnit : Codable {
 
   public init (from inDecoder : any Decoder) throws { // Decodable
     let container = try inDecoder.singleValueContainer ()
-    let string = try container.decode (String.self)
-    if let v = Int (string) {
-      self = CanariLengthUnit (fromNearestLength: v)
-    }else {
-      throw DecodingError.dataCorruptedError (in: container, debugDescription: "Invalid Canari Length")
-    }
+    let v = try container.decode (Int.self)
+    self = CanariLengthUnit (fromNearestLength: v)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

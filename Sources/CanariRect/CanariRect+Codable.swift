@@ -16,13 +16,13 @@ extension CanariRect : Codable {
     let container = try inDecoder.singleValueContainer ()
     let string = try container.decode (String.self)
     let components = string.split (separator: " ")
-    if components.count == 4,
-       let x = Int (components [0]),
-       let y = Int (components [1]),
-       let width = Int (components [2]),
-       let height = Int (components [3]) {
-      self.origin = CanariPoint (x: .cu (x), y: .cu (y))
-      self.size = CanariSize (width: .cu (width), height: .cu (height))
+    if components.count == 4 {
+      let x = try String (components [0]).decodedCanariLengthWithUnit (container)
+      let y = try String (components [1]).decodedCanariLengthWithUnit (container)
+      let width = try String (components [2]).decodedCanariLengthWithUnit (container)
+      let height = try String (components [3]).decodedCanariLengthWithUnit (container)
+      self.origin = CanariPoint (x: x, y: y)
+      self.size = CanariSize (width: width, height: height)
     }else {
       throw DecodingError.dataCorruptedError (in: container, debugDescription: "Invalid rectangle string")
     }
@@ -32,7 +32,14 @@ extension CanariRect : Codable {
 
   public func encode (to inEncoder : any Encoder) throws { // Encodable
     var container = inEncoder.singleValueContainer ()
-    try container.encode ("\(self.origin.x.cuValue) \(self.origin.y.cuValue) \(self.size.width.cuValue) \(self.size.height.cuValue)")
+    var str = self.origin.x.valueEncodedWithUnit
+    str += " "
+    str += self.origin.y.valueEncodedWithUnit
+    str += " "
+    str += self.size.width.valueEncodedWithUnit
+    str += " "
+    str += self.size.height.valueEncodedWithUnit
+    try container.encode (str)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

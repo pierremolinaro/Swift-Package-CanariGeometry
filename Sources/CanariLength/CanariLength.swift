@@ -8,7 +8,7 @@ import Foundation
 // struct CanariLength
 //--------------------------------------------------------------------------------------------------
 
-public struct CanariLength : Hashable, Comparable, Sendable {
+public struct CanariLength : Comparable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -158,6 +158,50 @@ public struct CanariLength : Hashable, Comparable, Sendable {
 
   public func string (in inUnit : CanariLengthUnit, fractionDigits inCount : Int) -> String {
     self.value (in: inUnit).strf (inCount) + " " + inUnit.unitString
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //  Hashable Protocol
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func hash (into hasher: inout Hasher) {
+    self.cuValue.hash (into: &hasher)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static func == (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
+    return inLeft.cuValue == inRight.cuValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static func != (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
+    return inLeft.cuValue != inRight.cuValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static func <= (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
+    return inLeft.cuValue <= inRight.cuValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static func >= (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
+    return inLeft.cuValue >= inRight.cuValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static func < (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
+    return inLeft.cuValue < inRight.cuValue
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static func > (_ inLeft : CanariLength, _ inRight : CanariLength) -> Bool {
+    return inLeft.cuValue > inRight.cuValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

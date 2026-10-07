@@ -14,9 +14,9 @@ extension CanariSize : Codable {
     let container = try inDecoder.singleValueContainer ()
     let string = try container.decode (String.self)
     let components = string.split (separator: " ")
-    if components.count == 2,
-       let width = String (components [0]).decodedCanariLengthWithUnit (),
-       let height = String (components [1]).decodedCanariLengthWithUnit () {
+    if components.count == 2 {
+      let width  = try String (components [0]).decodedCanariLengthWithUnit (container)
+      let height = try String (components [1]).decodedCanariLengthWithUnit (container)
       self = CanariSize (width: width, height: height)
     }else {
       throw DecodingError.dataCorruptedError (in: container, debugDescription: "Invalid CanariSize string")

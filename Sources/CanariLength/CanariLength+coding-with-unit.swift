@@ -13,18 +13,18 @@ extension CanariLength {
   public var valueEncodedWithUnit : String { // §
     if self == .zero {
       return "0"
-    }else if self.isAligned (on: CanariLengthUnit.cm.length) {
-      return "\(self.ptValue / CanariLengthUnit.cm.length.ptValue)cm"
-    }else if self.isAligned (on: CanariLengthUnit.mm.length) {
-      return "\(self.ptValue / CanariLengthUnit.mm.length.ptValue)mm"
-    }else if self.isAligned (on: CanariLengthUnit.µm.length) {
-      return "\(self.ptValue / CanariLengthUnit.µm.length.ptValue)µm"
     }else if self.isAligned (on: CanariLengthUnit.inch.length) {
-      return "\(self.ptValue / CanariLengthUnit.inch.length.ptValue)in"
-    }else if self.isAligned (on: CanariLengthUnit.mil.length) {
-      return "\(self.ptValue / CanariLengthUnit.mil.length.ptValue)mil"
+      return "\(Int (self.ptValue / CanariLengthUnit.inch.length.ptValue))in"
+    }else if self.isAligned (on: CanariLengthUnit.cm.length) {
+      return "\(Int (self.ptValue / CanariLengthUnit.cm.length.ptValue))cm"
+    }else if self.isAligned (on: CanariLengthUnit.mm.length) {
+      return "\(Int (self.ptValue / CanariLengthUnit.mm.length.ptValue))mm"
     }else if self.isAligned (on: CanariLengthUnit.pt.length) {
-      return "\(self.ptValue / CanariLengthUnit.pt.length.ptValue)pt"
+      return "\(Int (self.ptValue / CanariLengthUnit.pt.length.ptValue))pt"
+    }else if self.isAligned (on: CanariLengthUnit.mil.length) {
+      return "\(Int (self.ptValue / CanariLengthUnit.mil.length.ptValue))mil"
+    }else if self.isAligned (on: CanariLengthUnit.µm.length) {
+      return "\(Int (self.ptValue / CanariLengthUnit.µm.length.ptValue))µm"
     }else{
       return "\(self.cuValue)"
     }
@@ -40,7 +40,17 @@ extension Scanner {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func scanCanariLengthEncodedWithUnit () -> CanariLength? { // §
+  public func scanCanariLengthEncodedWithUnit (_ inContainer : SingleValueDecodingContainer) throws -> CanariLength {
+    if let v = self.scanCanariLengthEncodedWithUnit () {
+      return v
+    }else{
+      throw DecodingError.dataCorruptedError (in: inContainer, debugDescription: "Invalid Canari Length")
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func scanCanariLengthEncodedWithUnit () -> CanariLength? {
     if let v = self.scanInt () {
       if self.scanString ("mm") != nil {
         return .mm (v)
@@ -72,9 +82,9 @@ extension String {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func decodedCanariLengthWithUnit () -> CanariLength? { // §
+  public func decodedCanariLengthWithUnit (_ inContainer : SingleValueDecodingContainer) throws -> CanariLength {
     let scanner = Scanner (string: self)
-    return scanner.scanCanariLengthEncodedWithUnit ()
+    return try scanner.scanCanariLengthEncodedWithUnit (inContainer)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
