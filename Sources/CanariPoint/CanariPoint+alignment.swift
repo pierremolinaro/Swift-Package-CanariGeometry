@@ -32,7 +32,6 @@ extension CanariPoint {
     self.x.isAligned (on: inUnit) && self.y.isAligned (on: inUnit)
   }
 
-
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 }
