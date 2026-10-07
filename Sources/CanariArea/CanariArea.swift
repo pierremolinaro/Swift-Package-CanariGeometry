@@ -58,12 +58,14 @@ public struct CanariArea : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.pt2Value == 0 }
+  public var isZero : Bool { return self.pt2Value == 0.0 }
+  public var isPositive : Bool { self.pt2Value > 0.0 }
+  public var isNegative : Bool { self.pt2Value < 0.0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public static var zero : CanariArea { return .pt2 (0) }
-  public static var max  : CanariArea { CanariArea (.max, in: .cu2) }
+  public static var max  : CanariArea { CanariArea (.max / 4, in: .cu2) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

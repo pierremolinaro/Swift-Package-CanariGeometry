@@ -167,6 +167,16 @@ public struct CanariPoint : Hashable, CustomStringConvertible, Sendable, Equatab
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  static func product (_ p1 : CanariPoint, _ p2 : CanariPoint, _ p3 : CanariPoint) -> CanariArea {
+    let dx2 = p2.x - p1.x
+    let dy2 = p2.y - p1.y
+    let dx3 = p3.x - p1.x
+    let dy3 = p3.y - p1.y
+    return dx2 * dy3 - dx3 * dy2
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 }
 
 //--------------------------------------------------------------------------------------------------
