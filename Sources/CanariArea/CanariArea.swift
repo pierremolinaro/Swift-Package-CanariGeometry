@@ -61,6 +61,8 @@ public struct CanariArea : Hashable, Comparable, Sendable {
   public var isZero : Bool { return self.pt2Value == 0.0 }
   public var isPositive : Bool { self.pt2Value > 0.0 }
   public var isNegative : Bool { self.pt2Value < 0.0 }
+  public var isPositiveOrZero : Bool { self.pt2Value >= 0.0 }
+  public var isNegativeOrZero : Bool { self.pt2Value <= 0.0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
