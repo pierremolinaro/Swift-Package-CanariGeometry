@@ -1,9 +1,5 @@
-//
-//  Scanner+myScanUInt8.swift
-//  editeur-courbes-bezier
-//
+//--------------------------------------------------------------------------------------------------
 //  Created by Pierre Molinaro on 18/09/2025.
-//
 //--------------------------------------------------------------------------------------------------
 
 import AppKit
@@ -25,9 +21,7 @@ extension Int32 : CanariCodableByString {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func canariCodableEncodedString () -> String {
-    return "\(self)"
-  }
+  public func canariCodableEncodedString () -> String { "\(self)" }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

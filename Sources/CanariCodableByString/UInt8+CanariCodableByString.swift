@@ -21,9 +21,7 @@ extension UInt8 : CanariCodableByString {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func canariCodableEncodedString () -> String {
-    return "\(self)"
-  }
+  public func canariCodableEncodedString () -> String { "\(self)" }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

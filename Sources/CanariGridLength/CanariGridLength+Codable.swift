@@ -1,27 +1,28 @@
 //--------------------------------------------------------------------------------------------------
-//  Created by Pierre Molinaro on 02/06/2026.
+//  Created by Pierre Molinaro on 08/10/2026.
 //--------------------------------------------------------------------------------------------------
 
 import AppKit
 
 //--------------------------------------------------------------------------------------------------
 
-extension CGPoint : CanariCodableByString {
+extension CanariGridLength : Codable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (scanner inScanner : Scanner, _ ioOk : inout Bool) {
-    if ioOk, let x = inScanner.scanDouble (), let y = inScanner.scanDouble () {
-      self = CGPoint (x: x, y: y)
-    }else{
-      ioOk = false
-      self = .zero
-    }
+  public init (from inDecoder : any Decoder) throws { // Decodable
+    let container = try inDecoder.singleValueContainer ()
+    let string = try container.decode (String.self)
+    let v : CanariLength = try string.decodedCanariLengthWithUnit (container)
+    self = CanariGridLength (v)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func canariCodableEncodedString () -> String { "\(self.x) \(self.y)" }
+  public func encode (to inEncoder : any Encoder) throws { // Encodable
+    var container = inEncoder.singleValueContainer ()
+    try container.encode (self.length.stringValueEncodedWithUnit)
+  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

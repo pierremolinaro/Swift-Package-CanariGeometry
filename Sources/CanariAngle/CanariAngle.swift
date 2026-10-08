@@ -12,13 +12,13 @@ public struct CanariAngle : Equatable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let πValue : Double // -1 ... 1: -1 --> -π, +1 --> +π
+  internal let πValue : Double // -1 ... 1: -1 --> -π, +1 --> +π
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   //MARK: init
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (π inValue : Double) {
+  internal init (π inValue : Double) {
     self.πValue = πNormalized (inValue)
   }
 
@@ -50,16 +50,15 @@ public struct CanariAngle : Equatable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (from inStartPoint : NSPoint, to inTargetPoint : NSPoint) {
-    let dyMM = (inTargetPoint.y - inStartPoint.y)
-    let dxMM = (inTargetPoint.x - inStartPoint.x)
-    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
-  }
+//  public init (from inStartPoint : NSPoint, to inTargetPoint : NSPoint) {
+//    let dyMM = (inTargetPoint.y - inStartPoint.y)
+//    let dxMM = (inTargetPoint.x - inStartPoint.x)
+//    self.πValue = Darwin.atan2 (dyMM, dxMM) / .pi
+//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public static func degree (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .degree) }
-//  public static func degree (_ inValue : Int) -> CanariAngle { CanariAngle (inValue, in: .degree) }
 
   public static func radian (_ inValue : Double) -> CanariAngle { CanariAngle (inValue, in: .radian) }
 

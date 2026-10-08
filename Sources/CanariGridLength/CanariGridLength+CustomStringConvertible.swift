@@ -1,27 +1,18 @@
 //--------------------------------------------------------------------------------------------------
-//  Created by Pierre Molinaro on 02/06/2026.
+//  Created by Pierre Molinaro on 08/10/2026.
 //--------------------------------------------------------------------------------------------------
 
 import AppKit
 
 //--------------------------------------------------------------------------------------------------
 
-extension CGPoint : CanariCodableByString {
+extension CanariGridLength : CustomStringConvertible {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (scanner inScanner : Scanner, _ ioOk : inout Bool) {
-    if ioOk, let x = inScanner.scanDouble (), let y = inScanner.scanDouble () {
-      self = CGPoint (x: x, y: y)
-    }else{
-      ioOk = false
-      self = .zero
-    }
+  public var description : String { // CustomStringConvertible protocol
+    "\(self.value)"
   }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func canariCodableEncodedString () -> String { "\(self.x) \(self.y)" }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
