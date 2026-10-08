@@ -27,7 +27,7 @@ extension CanariPoint : Codable {
 
   public func encode (to inEncoder : any Encoder) throws { // Encodable
     var container = inEncoder.singleValueContainer ()
-    try container.encode ("\(self.x.valueEncodedWithUnit) \(self.y.valueEncodedWithUnit)")
+    try container.encode ("\(self.x.stringValueEncodedWithUnit) \(self.y.stringValueEncodedWithUnit)")
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

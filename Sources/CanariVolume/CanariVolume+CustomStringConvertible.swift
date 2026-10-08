@@ -6,22 +6,12 @@ import AppKit
 
 //--------------------------------------------------------------------------------------------------
 
-extension CanariLength : Codable {
+extension CanariVolume : CustomStringConvertible {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (from inDecoder : any Decoder) throws { // Decodable
-    let container = try inDecoder.singleValueContainer ()
-    let string = try container.decode (String.self)
-    self = try string.decodedCanariLengthWithUnit (container)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func encode (to inEncoder : any Encoder) throws { // Encodable
-    var container = inEncoder.singleValueContainer ()
-//    try container.encode (self.cuValue)
-    try container.encode (self.stringValueEncodedWithUnit)
+  public var description : String { // CustomStringConvertible protocol
+    self.value (in: .mm3).strf (3) + " " + CanariVolumeUnit.mm3.unitString
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

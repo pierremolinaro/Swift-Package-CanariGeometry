@@ -64,9 +64,9 @@ public struct CanariStrokeStyle : Equatable, Sendable, CanariCodableByString {
 
   public func canariCodableEncodedString () -> String {
     var str = "\(self.lineCapStyle.rawValue) \(self.lineJoinStyle.rawValue) "
-    str += self.lineWidth.valueEncodedWithUnit
+    str += self.lineWidth.stringValueEncodedWithUnit
     str += " "
-    str += self.miterLimit.valueEncodedWithUnit
+    str += self.miterLimit.stringValueEncodedWithUnit
     return str
   }
 

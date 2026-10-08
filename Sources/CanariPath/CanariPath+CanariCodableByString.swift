@@ -49,28 +49,28 @@ extension CanariPath : CanariCodableByString {
       case .move (to: let p) :
         let cp = CanariPoint (pt: p)
         let dP = cp - current
-        s += " M\(dP.x.valueEncodedWithUnit) \(dP.y.valueEncodedWithUnit)"
+        s += " M\(dP.x.stringValueEncodedWithUnit) \(dP.y.stringValueEncodedWithUnit)"
         current = cp
       case .line (to: let p) :
         let cp = CanariPoint (pt: p)
         let dP = cp - current
-        s += " L\(dP.x.valueEncodedWithUnit) \(dP.y.valueEncodedWithUnit)"
+        s += " L\(dP.x.stringValueEncodedWithUnit) \(dP.y.stringValueEncodedWithUnit)"
         current = cp
       case .curve (to: let p, control1: let ctrl1, control2: let ctrl2) :
         let cp = CanariPoint (pt: p)
         let dP = cp - current
         let dCtrl1 = CanariPoint (pt: ctrl1) - current
         let dCtrl2 = CanariPoint (pt: ctrl2) - current
-        s += " C\(dP.x.valueEncodedWithUnit) \(dP.y.valueEncodedWithUnit)"
-        s += " \(dCtrl1.x.valueEncodedWithUnit) \(dCtrl1.y.valueEncodedWithUnit)"
-        s += " \(dCtrl2.x.valueEncodedWithUnit) \(dCtrl2.y.valueEncodedWithUnit)"
+        s += " C\(dP.x.stringValueEncodedWithUnit) \(dP.y.stringValueEncodedWithUnit)"
+        s += " \(dCtrl1.x.stringValueEncodedWithUnit) \(dCtrl1.y.stringValueEncodedWithUnit)"
+        s += " \(dCtrl2.x.stringValueEncodedWithUnit) \(dCtrl2.y.stringValueEncodedWithUnit)"
         current = cp
       case .quadCurve (to: let p, control: let ctrl) :
         let cp = CanariPoint (pt: p)
         let dP = cp - current
         let dCtrl = CanariPoint (pt: ctrl) - current
-        s += " Q\(dP.x.valueEncodedWithUnit) \(dP.y.valueEncodedWithUnit)"
-        s += " \(dCtrl.x.valueEncodedWithUnit) \(dCtrl.y.valueEncodedWithUnit)"
+        s += " Q\(dP.x.stringValueEncodedWithUnit) \(dP.y.stringValueEncodedWithUnit)"
+        s += " \(dCtrl.x.stringValueEncodedWithUnit) \(dCtrl.y.stringValueEncodedWithUnit)"
         current = cp
       }
     }

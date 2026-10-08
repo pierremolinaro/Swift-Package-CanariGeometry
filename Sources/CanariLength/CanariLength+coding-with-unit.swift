@@ -10,7 +10,7 @@ extension CanariLength {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var valueEncodedWithUnit : String { // §
+  public var stringValueEncodedWithUnit : String {
     if self == .zero {
       return "0"
     }else if self.isAligned (on: CanariLengthUnit.inch.length) {

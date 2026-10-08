@@ -24,7 +24,7 @@ extension CanariPoint : CanariCodableByString {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func canariCodableEncodedString () -> String {
-    return "\(self.x.valueEncodedWithUnit) \(self.y.valueEncodedWithUnit)"
+    return "\(self.x.stringValueEncodedWithUnit) \(self.y.stringValueEncodedWithUnit)"
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

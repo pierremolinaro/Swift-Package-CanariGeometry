@@ -32,13 +32,13 @@ extension CanariRect : Codable {
 
   public func encode (to inEncoder : any Encoder) throws { // Encodable
     var container = inEncoder.singleValueContainer ()
-    var str = self.origin.x.valueEncodedWithUnit
+    var str = self.origin.x.stringValueEncodedWithUnit
     str += " "
-    str += self.origin.y.valueEncodedWithUnit
+    str += self.origin.y.stringValueEncodedWithUnit
     str += " "
-    str += self.size.width.valueEncodedWithUnit
+    str += self.size.width.stringValueEncodedWithUnit
     str += " "
-    str += self.size.height.valueEncodedWithUnit
+    str += self.size.height.stringValueEncodedWithUnit
     try container.encode (str)
   }
 
