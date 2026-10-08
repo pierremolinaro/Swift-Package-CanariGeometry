@@ -70,7 +70,9 @@ public struct CanariLength : Comparable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.ptValue == 0.0 }
+  public var isZero     : Bool { self.ptValue == 0.0 }
+  public var isPositive : Bool { self.ptValue >  0.0 }
+  public var isNegative : Bool { self.ptValue <  0.0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
