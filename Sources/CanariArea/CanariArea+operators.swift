@@ -81,7 +81,7 @@ public func * (_ inLeft : CanariArea, _ inRight : Int) -> CanariArea {
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariArea, _ inRight : CanariArea) -> Double {
-  return inLeft.value (in: .mm2) / inRight.value (in: .mm2)
+  return Double (inLeft.cu2Value) / Double (inRight.cu2Value)
 }
 
 //--------------------------------------------------------------------------------------------------
