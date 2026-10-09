@@ -7,7 +7,7 @@ import Foundation
 //--------------------------------------------------------------------------------------------------
 
 public func abs (_ inValue : CanariLength) -> CanariLength {
-  return .pt (abs (inValue.ptValue))
+  return .cu (abs (inValue.cuValue))
 }
 
 //--------------------------------------------------------------------------------------------------

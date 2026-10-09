@@ -41,7 +41,6 @@ extension CanariLength {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func isAligned (on inUnit : CanariLength) -> Bool {
-//    self.ptValue.remainder (dividingBy: inUnit.ptValue) == 0.0
     self.cuValue % inUnit.cuValue == 0
   }
 

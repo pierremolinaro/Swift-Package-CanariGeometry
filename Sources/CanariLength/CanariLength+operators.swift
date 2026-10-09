@@ -81,25 +81,25 @@ public func * (_ inLeft : CanariLength, _ inRight : Int) -> CanariLength {
 //--------------------------------------------------------------------------------------------------
 
 public func * (_ inLeft : CanariLength, _ inRight : CanariLength) -> CanariArea {
-  return CanariArea.pt2 (inRight.ptValue * inLeft.ptValue)
+  return CanariArea.cu2 (inRight.cuValue * inLeft.cuValue)
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariLength, _ inRight : CanariLength) -> Double {
-  return inLeft.value (in: .mm) / inRight.value (in: .mm)
+  return Double (inLeft.cuValue) / Double (inRight.cuValue)
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariLength, _ inRight : Double) -> CanariLength {
-  return .pt (inLeft.ptValue / inRight)
+  return .cu (Int (Double (inLeft.cuValue) / inRight))
 }
 
 //--------------------------------------------------------------------------------------------------
 
 public func / (_ inLeft : CanariLength, _ inRight : Int) -> CanariLength {
-  return .pt (inLeft.ptValue / Double (inRight))
+  return .cu (inLeft.cuValue / inRight)
 }
 
 //--------------------------------------------------------------------------------------------------
