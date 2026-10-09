@@ -5,6 +5,8 @@
 import Foundation
 
 //--------------------------------------------------------------------------------------------------
+// https://en.wikipedia.org/wiki/Affine_transformation
+//--------------------------------------------------------------------------------------------------
 
 public nonisolated struct CanariAffinity : Equatable, Sendable {
 
@@ -26,24 +28,18 @@ public nonisolated struct CanariAffinity : Equatable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var affineTransform : AffineTransform { self.mAffineTransform } // § --> internal
+//  public init (multipling inLeft : CanariAffinity, by inRight : CanariAffinity) {
+//    self.mAffineTransform = inLeft.mAffineTransform
+//    self.mAffineTransform.append (inRight.mAffineTransform)
+//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (_ inAffineTransform : CGAffineTransform) {
-    self.mAffineTransform = AffineTransform (
-      m11: inAffineTransform.a,
-      m12: inAffineTransform.b,
-      m21: inAffineTransform.c,
-      m22: inAffineTransform.d,
-      tX: inAffineTransform.tx,
-      tY: inAffineTransform.ty
-    )
-  }
+  public var affineTransform : AffineTransform { self.mAffineTransform }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-  public var cgAffineTransform : CGAffineTransform { // § internal
+  internal var cgAffineTransform : CGAffineTransform { // § internal
     CGAffineTransform (
       a: self.mAffineTransform.m11,
       b: self.mAffineTransform.m12,
