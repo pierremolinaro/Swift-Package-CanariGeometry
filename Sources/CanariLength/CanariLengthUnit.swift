@@ -57,18 +57,18 @@ public enum CanariLengthUnit : Sendable, Equatable, CaseIterable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var ptValue : Double {
-    switch self {
-      case .mm   : return Double (CANARI_UNITS_PER_MM) / Double (CANARI_UNITS_PER_POINT)
-      case .cm   : return Double (CANARI_UNITS_PER_CM) / Double (CANARI_UNITS_PER_POINT)
-      case .m    : return Double (CANARI_UNITS_PER_M) / Double (CANARI_UNITS_PER_POINT)
-      case .inch : return Double (CANARI_UNITS_PER_INCH) / Double (CANARI_UNITS_PER_POINT)
-      case .mil  : return Double (CANARI_UNITS_PER_MIL) / Double (CANARI_UNITS_PER_POINT)
-      case .µm   : return Double (CANARI_UNITS_PER_µM) / Double (CANARI_UNITS_PER_POINT)
-      case .pt   : return 1.0 // Double (CANARI_UNITS_PER_POINT) / Double (CANARI_UNITS_PER_POINT)
-      case .cu   : return 1.0 / Double (CANARI_UNITS_PER_POINT)
-    }
-  }
+//  public var ptValue : Double {
+//    switch self {
+//      case .mm   : return Double (CANARI_UNITS_PER_MM) / Double (CANARI_UNITS_PER_POINT)
+//      case .cm   : return Double (CANARI_UNITS_PER_CM) / Double (CANARI_UNITS_PER_POINT)
+//      case .m    : return Double (CANARI_UNITS_PER_M) / Double (CANARI_UNITS_PER_POINT)
+//      case .inch : return Double (CANARI_UNITS_PER_INCH) / Double (CANARI_UNITS_PER_POINT)
+//      case .mil  : return Double (CANARI_UNITS_PER_MIL) / Double (CANARI_UNITS_PER_POINT)
+//      case .µm   : return Double (CANARI_UNITS_PER_µM) / Double (CANARI_UNITS_PER_POINT)
+//      case .pt   : return 1.0 // Double (CANARI_UNITS_PER_POINT) / Double (CANARI_UNITS_PER_POINT)
+//      case .cu   : return 1.0 / Double (CANARI_UNITS_PER_POINT)
+//    }
+//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -87,7 +87,7 @@ public enum CanariLengthUnit : Sendable, Equatable, CaseIterable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var length : CanariLength { .pt (self.ptValue) }
+  public var length : CanariLength { .cu (self.cuValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

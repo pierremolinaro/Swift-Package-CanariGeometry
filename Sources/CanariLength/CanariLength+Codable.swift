@@ -30,17 +30,17 @@ extension CanariLength : Codable {
     if self == .zero {
       return "0"
     }else if self.isAligned (on: CanariLengthUnit.inch.length) {
-      return "\(Int (self.ptValue / CanariLengthUnit.inch.length.ptValue))in"
+      return "\(self.cuValue / CanariLengthUnit.inch.length.cuValue)in"
     }else if self.isAligned (on: CanariLengthUnit.cm.length) {
-      return "\(Int (self.ptValue / CanariLengthUnit.cm.length.ptValue))cm"
+      return "\(self.cuValue / CanariLengthUnit.cm.length.cuValue)cm"
     }else if self.isAligned (on: CanariLengthUnit.mm.length) {
-      return "\(Int (self.ptValue / CanariLengthUnit.mm.length.ptValue))mm"
+      return "\(self.cuValue / CanariLengthUnit.mm.length.cuValue)mm"
     }else if self.isAligned (on: CanariLengthUnit.pt.length) {
-      return "\(Int (self.ptValue / CanariLengthUnit.pt.length.ptValue))pt"
+      return "\(self.cuValue / CanariLengthUnit.pt.length.cuValue)pt"
     }else if self.isAligned (on: CanariLengthUnit.mil.length) {
-      return "\(Int (self.ptValue / CanariLengthUnit.mil.length.ptValue))mil"
+      return "\(self.cuValue / CanariLengthUnit.mil.length.cuValue)mil"
     }else if self.isAligned (on: CanariLengthUnit.µm.length) {
-      return "\(Int (self.ptValue / CanariLengthUnit.µm.length.ptValue))µm"
+      return "\(self.cuValue / CanariLengthUnit.µm.length.cuValue)µm"
     }else{
       return "\(self.cuValue)"
     }

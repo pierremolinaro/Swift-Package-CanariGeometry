@@ -20,15 +20,15 @@ public enum CanariAreaUnit : Sendable, Equatable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var pt2Value : Double {
+  public var cu2Value : Int {
     switch self {
-      case .mm2   : return CanariLengthUnit.mm.ptValue * CanariLengthUnit.mm.ptValue
-      case .cm2   : return CanariLengthUnit.cm.ptValue * CanariLengthUnit.cm.ptValue
-      case .inch2 : return CanariLengthUnit.inch.ptValue * CanariLengthUnit.inch.ptValue
-      case .mil2  : return CanariLengthUnit.mil.ptValue * CanariLengthUnit.mil.ptValue
-      case .µm2   : return CanariLengthUnit.µm.ptValue * CanariLengthUnit.µm.ptValue
-      case .cu2   : return CanariLengthUnit.cu.ptValue * CanariLengthUnit.cu.ptValue
-      case .pt2   : return CanariLengthUnit.pt.ptValue * CanariLengthUnit.pt.ptValue
+      case .mm2   : return CanariLengthUnit.mm.cuValue * CanariLengthUnit.mm.cuValue
+      case .cm2   : return CanariLengthUnit.cm.cuValue * CanariLengthUnit.cm.cuValue
+      case .inch2 : return CanariLengthUnit.inch.cuValue * CanariLengthUnit.inch.cuValue
+      case .mil2  : return CanariLengthUnit.mil.cuValue * CanariLengthUnit.mil.cuValue
+      case .µm2   : return CanariLengthUnit.µm.cuValue * CanariLengthUnit.µm.cuValue
+      case .cu2   : return CanariLengthUnit.cu.cuValue * CanariLengthUnit.cu.cuValue
+      case .pt2   : return CanariLengthUnit.pt.cuValue * CanariLengthUnit.pt.cuValue
     }
   }
 
@@ -48,7 +48,7 @@ public enum CanariAreaUnit : Sendable, Equatable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var area : CanariArea { .pt2 (self.pt2Value) }
+  public var area : CanariArea { .cu2 (self.cu2Value) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

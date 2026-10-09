@@ -12,57 +12,57 @@ public struct CanariArea : Hashable, Comparable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let pt2Value : Double
+  public let cu2Value : Int
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Double, in inLengthUnit : CanariAreaUnit) {
-    self.pt2Value = inValue * inLengthUnit.pt2Value
+    self.cu2Value = Int (inValue * Double (inLengthUnit.cu2Value))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (pt2 inValue : Double) {
-    self.pt2Value = inValue
+    self.cu2Value = Int (inValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (pt2 inValue : Int) {
-    self.pt2Value = Double (inValue)
+    self.cu2Value = inValue * CanariAreaUnit.pt2.cu2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Int, in inLengthUnit : CanariAreaUnit) {
-    self.pt2Value = Double (inValue) * inLengthUnit.pt2Value
+    self.cu2Value = inValue * inLengthUnit.cu2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   internal init (adding inA : CanariArea, _ inB : CanariArea) {
-    self.pt2Value = inA.pt2Value + inB.pt2Value
+    self.cu2Value = inA.cu2Value + inB.cu2Value
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariArea, multipliedByDouble inOperand : Double) {
-    self.pt2Value = inFactor.pt2Value * inOperand
+    self.cu2Value = Int (Double (inFactor.cu2Value) * inOperand)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariArea, multipliedByInt inOperand : Int) {
-    self.pt2Value = inFactor.pt2Value * Double (inOperand)
+    self.cu2Value = inFactor.cu2Value * inOperand
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero : Bool { return self.pt2Value == 0.0 }
-  public var isPositive : Bool { self.pt2Value > 0.0 }
-  public var isNegative : Bool { self.pt2Value < 0.0 }
-  public var isPositiveOrZero : Bool { self.pt2Value >= 0.0 }
-  public var isNegativeOrZero : Bool { self.pt2Value <= 0.0 }
+  public var isZero : Bool { return self.cu2Value == 0 }
+  public var isPositive : Bool { self.cu2Value > 0 }
+  public var isNegative : Bool { self.cu2Value < 0 }
+  public var isPositiveOrZero : Bool { self.cu2Value >= 0 }
+  public var isNegativeOrZero : Bool { self.cu2Value <= 0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -104,25 +104,19 @@ public struct CanariArea : Hashable, Comparable, Sendable {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var cm2Value : Double {
-    self.pt2Value / CanariAreaUnit.cm2.pt2Value
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public var cu2Value : Double {
-    self.pt2Value / CanariAreaUnit.cu2.pt2Value
+    Double (self.cu2Value / CanariAreaUnit.cm2.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mm2Value : Double {
-    self.pt2Value / CanariAreaUnit.mm2.pt2Value
+    Double (self.cu2Value / CanariAreaUnit.mm2.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func value (in inUnit : CanariAreaUnit) -> Double {
-    self.pt2Value / inUnit.pt2Value
+    Double (self.cu2Value / inUnit.cu2Value)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

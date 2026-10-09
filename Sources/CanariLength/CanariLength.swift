@@ -12,69 +12,69 @@ public struct CanariLength : Comparable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public let ptValue : Double
+  public let cuValue : Int
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (cu inValue : Int) {
-    self.ptValue = Double (inValue) * CanariLengthUnit.cu.ptValue
+    self.cuValue = inValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (cu inValue : Double) {
-    self.ptValue = inValue * CanariLengthUnit.cu.ptValue
+    self.cuValue = Int (inValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (pt inValue : Int) {
-    self.ptValue = Double (inValue) // * CanariLengthUnit.cu.ptValue
+    self.cuValue = inValue * CanariLengthUnit.pt.cuValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (pt inValue : Double) {
-    self.ptValue = inValue // * CanariLengthUnit.cu.ptValue
+    self.cuValue = Int (inValue * Double (CanariLengthUnit.pt.cuValue))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Double, in inLengthUnit : CanariLengthUnit) {
-    self.ptValue = inValue * inLengthUnit.ptValue
+    self.cuValue = Int (inValue * Double (inLengthUnit.cuValue))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inValue : Int, in inLengthUnit : CanariLengthUnit) {
-    self.ptValue = Double (inValue) * inLengthUnit.ptValue
+    self.cuValue = inValue * inLengthUnit.cuValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   internal init (adding inA : CanariLength, _ inB : CanariLength) {
-    self.ptValue = inA.ptValue + inB.ptValue
+    self.cuValue = inA.cuValue + inB.cuValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariLength, multipliedByDouble inOperand : Double) {
-    self.ptValue = inFactor.ptValue * inOperand
+    self.cuValue = Int (inOperand * Double (inFactor.cuValue))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public init (_ inFactor : CanariLength, multipliedByInt inOperand : Int) {
-    self.ptValue = inFactor.ptValue * Double (inOperand)
+    self.cuValue = inOperand * inFactor.cuValue
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var isZero     : Bool { self.ptValue == 0.0 }
-  public var isPositive : Bool { self.ptValue >  0.0 }
-  public var isNegative : Bool { self.ptValue <  0.0 }
-  public var isPositiveOrZero : Bool { self.ptValue >= 0.0 }
-  public var isNegativeOrZero : Bool { self.ptValue <= 0.0 }
+  public var isZero     : Bool { self.cuValue == 0 }
+  public var isPositive : Bool { self.cuValue >  0 }
+  public var isNegative : Bool { self.cuValue <  0 }
+  public var isPositiveOrZero : Bool { self.cuValue >= 0 }
+  public var isNegativeOrZero : Bool { self.cuValue <= 0 }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -91,7 +91,7 @@ public struct CanariLength : Comparable, Hashable, Sendable {
   public static func inch (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .inch) }
   public static func mil  (_ inValue : Int) -> CanariLength { CanariLength (inValue, in: .mil) }
   public static func pt   (_ inValue : Int) -> CanariLength { CanariLength (pt: inValue) }
-  public static func cu   (_ inValue : Int) -> CanariLength { CanariLength (cu: Double (inValue)) }
+  public static func cu   (_ inValue : Int) -> CanariLength { CanariLength (cu: inValue) }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -118,44 +118,44 @@ public struct CanariLength : Comparable, Hashable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public var cuValue : Int {
-    Int (self.ptValue / CanariLengthUnit.cu.ptValue)
+  public var ptValue : Double {
+    Double (self.cuValue) / Double (CanariLengthUnit.pt.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var cmValue : Double {
-    self.ptValue / CanariLengthUnit.cm.ptValue
+    Double (self.cuValue) / Double (CanariLengthUnit.cm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var mmValue : Double {
-    self.ptValue / CanariLengthUnit.mm.ptValue
+    Double (self.cuValue) / Double (CanariLengthUnit.mm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var inchValue : Double {
-    self.ptValue / CanariLengthUnit.inch.ptValue
+    Double (self.cuValue) / Double (CanariLengthUnit.inch.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var milValue : Double {
-    self.ptValue / CanariLengthUnit.mil.ptValue
+    Double (self.cuValue) / Double (CanariLengthUnit.mil.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public var µmValue : CGFloat {
-    self.ptValue / CanariLengthUnit.µm.ptValue
+    Double (self.cuValue) / Double (CanariLengthUnit.µm.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func value (in inUnit : CanariLengthUnit) -> Double {
-    self.ptValue / inUnit.ptValue
+    Double (self.cuValue) / Double (inUnit.cuValue)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
