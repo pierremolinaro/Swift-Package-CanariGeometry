@@ -5,7 +5,10 @@
 import Foundation
 
 //--------------------------------------------------------------------------------------------------
-//  Operators
+
+extension CanariLength : AdditiveArithmetic {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 public func + (_ inLeft : CanariLength, _ inRight : CanariLength) -> CanariLength {
