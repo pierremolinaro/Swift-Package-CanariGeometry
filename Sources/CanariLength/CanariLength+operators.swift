@@ -6,11 +6,6 @@ import Foundation
 
 //--------------------------------------------------------------------------------------------------
 
-extension CanariLength : AdditiveArithmetic {
-}
-
-//--------------------------------------------------------------------------------------------------
-
 public func + (_ inLeft : CanariLength, _ inRight : CanariLength) -> CanariLength {
   return CanariLength (adding: inLeft, inRight)
 }
