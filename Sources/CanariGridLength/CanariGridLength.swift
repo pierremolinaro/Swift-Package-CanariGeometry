@@ -81,15 +81,7 @@ public struct CanariGridLength <GRID : CanariGridLengthProtocol> : Comparable, H
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //  Hashable Protocol
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  public func hash (into hasher: inout Hasher) {
-//    self.cuValue.hash (into: &hasher)
-//  }
-//
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //  Comprable Protocol
+  //  Comparable Protocol
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public static func == (_ inLeft : CanariGridLength, _ inRight : CanariGridLength) -> Bool {

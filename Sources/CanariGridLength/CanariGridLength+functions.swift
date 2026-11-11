@@ -11,9 +11,3 @@ public func abs <GRID : CanariGridLengthProtocol> (_ inValue : CanariGridLength 
 }
 
 //--------------------------------------------------------------------------------------------------
-
-//public func square <GRID : CanariGridLengthProtocol> (_ inValue : CanariGridLength <GRID>) -> CanariArea {
-//  return inValue * inValue
-//}
-
-//--------------------------------------------------------------------------------------------------
