@@ -92,7 +92,7 @@ public struct CanariPath : Equatable, Sendable {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public init (roundedRect inRect : CGRect, xRadius : CGFloat, yRadius : CGFloat) {
+  public init (roundedRect inRect : CGRect, xRadius : Double, yRadius : Double) {
     self.mPath = Path (roundedRect: inRect, cornerSize: CGSize (width: xRadius, height: yRadius))
   }
 

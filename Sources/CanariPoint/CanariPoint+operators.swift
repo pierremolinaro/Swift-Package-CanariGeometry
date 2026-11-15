@@ -36,13 +36,13 @@ public prefix func - (_ inOperand : CanariPoint) -> CanariPoint {
 
 //--------------------------------------------------------------------------------------------------
 
-public func * (_ inLeft : CGFloat, _ inRight : CanariPoint) -> CanariPoint {
+public func * (_ inLeft : Double, _ inRight : CanariPoint) -> CanariPoint {
   return CanariPoint (x: inLeft * inRight.x, y: inLeft * inRight.y)
 }
 
 //--------------------------------------------------------------------------------------------------
 
-public func / (_ inLeft : CanariPoint, _ inRight : CGFloat) -> CanariPoint {
+public func / (_ inLeft : CanariPoint, _ inRight : Double) -> CanariPoint {
   return CanariPoint (x: inLeft.x / inRight, y: inLeft.y / inRight)
 }
 
@@ -66,13 +66,13 @@ public func -= (_ ioLeft : inout CanariPoint, _ inRight : CanariPoint) {
 
 //--------------------------------------------------------------------------------------------------
 
-public func *= (_ ioLeft : inout CanariPoint, _ inRight : CGFloat) {
+public func *= (_ ioLeft : inout CanariPoint, _ inRight : Double) {
   ioLeft = inRight * ioLeft
 }
 
 //--------------------------------------------------------------------------------------------------
 
-public func /= (_ ioLeft : inout CanariPoint, _ inRight : CGFloat) {
+public func /= (_ ioLeft : inout CanariPoint, _ inRight : Double) {
   ioLeft = ioLeft / inRight
 }
 

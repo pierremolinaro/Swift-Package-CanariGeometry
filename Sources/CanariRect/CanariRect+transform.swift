@@ -12,7 +12,7 @@ public extension CanariRect {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  func scaled (by inScale : CGFloat) -> CanariRect {
+  func scaled (by inScale : Double) -> CanariRect {
     return CanariRect (
       origin: CanariPoint (x: self.origin.x * inScale, y: self.origin.y * inScale),
       size: CanariSize (width: self.size.width * inScale, height: self.size.height * inScale)

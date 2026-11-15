@@ -6,7 +6,7 @@ import Foundation
 
 //--------------------------------------------------------------------------------------------------
 
-public func * (_ inLeft : CGFloat, _ inRight : CanariSize) -> CanariSize {
+public func * (_ inLeft : Double, _ inRight : CanariSize) -> CanariSize {
   return CanariSize (width: inLeft * inRight.width, height: inLeft * inRight.height)
 }
 

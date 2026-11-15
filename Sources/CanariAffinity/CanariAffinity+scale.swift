@@ -20,7 +20,7 @@ extension CanariAffinity {
      [ 0  0  1 ]
  */
 
-  public static func scaling (x inFactorX : CGFloat, y inFactorY : CGFloat) -> CanariAffinity {
+  public static func scaling (x inFactorX : Double, y inFactorY : Double) -> CanariAffinity {
     var af = CanariAffinity ()
     af.scale (x: inFactorX, y: inFactorY)
     return af
@@ -36,7 +36,7 @@ extension CanariAffinity {
        [ 0  0  1 ]
   */
 
-  public static func scaling (_ inFactor : CGFloat,
+  public static func scaling (_ inFactor : Double,
                               horizontalFlip inHorizontalFlip : Bool = false) -> CanariAffinity {
     var af = CanariAffinity ()
     af.mAffineTransform = AffineTransform (
@@ -79,7 +79,7 @@ extension CanariAffinity {
    Mutates an affine transformation matrix from a scale value.
   */
 
-  public mutating func scale (_ inFactor : CGFloat) {
+  public mutating func scale (_ inFactor : Double) {
     self.mAffineTransform .scale (inFactor)
   }
 
@@ -88,7 +88,7 @@ extension CanariAffinity {
    Mutates an affine transformation matrix from a x-scale and y-scale values.
   */
 
-  public mutating func scale (x inFactorX : CGFloat, y inFactorY : CGFloat) {
+  public mutating func scale (x inFactorX : Double, y inFactorY : Double) {
     self.mAffineTransform.scale (x: inFactorX, y: inFactorY)
   }
 
